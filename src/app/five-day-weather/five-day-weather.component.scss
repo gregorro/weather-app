@@ -1,0 +1,26 @@
+* {
+  color: white;
+}
+
+.weather > div{
+  display: inline-block;
+  width: 19%;
+  margin-right: 10px;
+  transform: 1s;
+  &:last-of-type{
+    margin-right: 0;
+  }
+  &:hover{
+    background-color: rgba(0,0,0, 0.4);
+    cursor: pointer;
+  }
+}
+
+.weather ~ div > div {
+  display: inline-block;
+  margin-right: 10px;
+  width: 11.5%;
+  &:last-of-type{
+    margin-right: 0;
+  }
+}

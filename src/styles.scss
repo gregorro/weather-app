@@ -1,1 +1,136 @@
-/* You can add global styles to this file, and also import other style files */
+body::before {
+  content: "";
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  background: url("./assets/sun.jpg") no-repeat center 20%;
+  background-blend-mode: none;
+  background-color: none;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+table td:first-of-type {
+  padding-right: 10px;
+}
+
+///////////////////////////////////////
+
+.thunderstorm-weather {
+  &::before {
+    background: url("./assets/thunderstorm.jpg") no-repeat center 20%;
+  }
+  header {
+
+  }
+  #aside-panel{
+
+  }
+}
+
+.drizzle-weather {
+  &::before {
+    background: url("./assets/drizzle.jpg") no-repeat center 20%;
+  }
+  header {
+
+  }
+  #aside-panel{
+
+  }
+}
+
+.rain-weather {
+  &::before {
+    background: url("./assets/rain.jpg") no-repeat center 20%;
+  }
+  header {
+
+  }
+  #aside-panel{
+
+  }
+}
+
+.snow-weather {
+  &::before {
+    background: url("./assets/snow.jpg") no-repeat center 20%;
+  }
+  header {
+
+  }
+  #aside-panel{
+
+  }
+}
+
+.atmosphere-weather {
+  &::before {
+    background: url("./assets/atmosphere.jpg") no-repeat center 20%;
+  }
+  header {
+
+  }
+  #aside-panel{
+
+  }
+}
+
+.clear-weather {
+  &::before {
+    background: url("./assets/clear.jpg") no-repeat center 20%;
+  }
+  header {
+
+  }
+  #aside-panel{
+
+  }
+}
+
+.clouds-weather {
+  &::before {
+    background: url("./assets/clouds.jpg") no-repeat center 20%;
+  }
+  header {
+
+  }
+  #aside-panel{
+
+  }
+}
+
+/////////////////////////////////
+
+.p-view {
+  width: 100%;
+
+  input {
+    width: 100%;
+  }
+}
+
+body .ui-button.ui-button-icon-only {
+  float: right;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 10px;
+
+  span.ui-button-icon-right {
+    margin-top: 1px;
+  }
+
+  span.ui-button-text {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+  }
+}

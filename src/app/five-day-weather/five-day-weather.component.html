@@ -1,0 +1,87 @@
+<div *ngIf="!isAvailableData">
+  <p>
+    Wybierz miasto by wyświetlić dane.
+  </p>
+</div>
+<div class="weather" *ngIf="isAvailableData">
+  <h1>Forecast</h1>
+  <div *ngFor="let day of daysWeather; index as i" (click)="setHourWeather(i)">
+    <p>{{day.text}}</p>
+    <img src={{day.picture}}>
+    <h1>{{day.temp}}°C</h1>
+    <table>
+      <tr *ngIf="day.wind">
+        <td>Wind</td>
+        <th>{{day.wind.speed}} km/h
+          <img id="arrow-{{i}}" src="../../assets/left-arrow.png">
+        </th>
+      </tr>
+      <tr>
+        <td>Pressure</td>
+        <th>{{day.pressure}} hPa</th>
+      </tr>
+      <tr>
+        <td>Humidity</td>
+        <th>{{day.humidity}}%</th>
+      </tr>
+      <tr *ngIf="day.clouds">
+        <td>Clouds</td>
+        <th>{{day.clouds.all}}%</th>
+      </tr>
+      <tr *ngIf="day.rain">
+        <td>Rain</td>
+        <th>
+          {{day.rain['1h'] ? day.rain['1h']:  day.rain['3h'] }}
+          mm/cm3
+        </th>
+      </tr>
+      <tr *ngIf="day.snow">
+        <td>Snow</td>
+        <th>
+          {{day.snow['1h'] ? day.snow['1h'] : hour.snow['3h'] }}
+          mm/cm3
+        </th>
+      </tr>
+    </table>
+  </div>
+</div>
+<div *ngIf="isHourWeather">
+  <div *ngFor="let hour of currentHourWeather; index as i">
+    <p>{{hour.text}}</p>
+    <img src={{hour.picture}}>
+    <h1>{{hour.temp}}°C</h1>
+    <table>
+      <tr *ngIf="hour.wind">
+        <td>Wind</td>
+        <th>{{hour.wind.speed}} km/h
+          <img id="arrow-{{i+5}}" src="../../assets/left-arrow.png">
+        </th>
+      </tr>
+      <tr>
+        <td>Pressure</td>
+        <th>{{hour.pressure}} hPa</th>
+      </tr>
+      <tr>
+        <td>Humidity</td>
+        <th>{{hour.humidity}}%</th>
+      </tr>
+      <tr *ngIf="hour.clouds">
+        <td>Clouds</td>
+        <th>{{hour.clouds.all}}%</th>
+      </tr>
+      <tr *ngIf="hour.rain">
+        <td>Rain</td>
+        <th>
+          {{hour.rain['1h'] ? hour.rain['1h']:  hour.rain['3h'] }}
+          mm/cm3
+        </th>
+      </tr>
+      <tr *ngIf="hour.snow">
+        <td>Snow</td>
+        <th>
+          {{hour.snow['1h'] ? hour.snow['1h'] : hour.snow['3h'] }} mm/cm3
+        </th>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div *ngIf="!isAvailableData">
+  <p>
+    Wybierz miasto by wyświetlić dane.
+  </p>
+</div>
+<div *ngIf="isAvailableData">
+  <div class="weather-box">
+    <h1>Current weather</h1>
+    <div>
+      <div>
+        <p>{{currentDate}}</p>
+        <img src="http://openweathermap.org/img/wn/{{currentViewWeather.weather[0].icon}}@2x.png">
+        <h1>{{(currentViewWeather.main.temp - 273.15).toFixed(0)}}°C</h1>
+      </div>
+      <div>
+        <table>
+          <tr *ngIf="currentViewWeather.wind">
+            <td>Wind</td>
+            <th>{{currentViewWeather.wind.speed}} km/h
+              <img id="arrow" src="../../assets/left-arrow.png">
+            </th>
+          </tr>
+          <tr>
+            <td>Pressure</td>
+            <th>{{currentViewWeather.main.pressure}} hPa</th>
+          </tr>
+          <tr>
+            <td>Humidity</td>
+            <th>{{currentViewWeather.main.humidity}}%</th>
+          </tr>
+          <tr *ngIf="currentViewWeather.clouds">
+            <td>Clouds</td>
+            <th>{{currentViewWeather.clouds.all}}%</th>
+          </tr>
+          <tr *ngIf="currentViewWeather.visibility">
+            <td>Visibility</td>
+            <th>{{currentViewWeather.visibility}} m</th>
+          </tr>
+          <tr *ngIf="currentViewWeather.rain">
+            <td>Rain</td>
+            <th>{{currentViewWeather.rain['1h'] ? currentViewWeather.rain['1h']:  currentViewWeather.rain['3h'] }}
+              mm/cm3
+            </th>
+          </tr>
+          <tr *ngIf="currentViewWeather.snow">
+            <td>Rain</td>
+            <th>{{currentViewWeather.snow['1h'] ?currentViewWeather.snow['1h'] : currentViewWeather.snow['3h'] }} mm/cm3</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="map">
+      <p-gmap #gmap [options]="options" [style]="{'width':'100%','height':'100%'}"></p-gmap>
+    </div>
+  </div>
+</div>

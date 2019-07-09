@@ -1,0 +1,64 @@
+h4 {
+  color: white;
+}
+
+
+div.conteiner {
+  position: fixed;
+  height: 100%;
+  width: 400px;
+  background-color: rgba(71, 129, 193, 0.3);
+  margin-top: 50px;
+  box-sizing: border-box;
+  transition: 1.5s;
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  transform: translateX(-500px);
+  opacity: 0;
+  visibility: hidden;
+
+  &>div {
+    padding-top: 30px;
+    width: 80%;
+    margin: 0 auto;
+
+    &>div:not(:last-of-type) {
+      margin-bottom: 50px;
+    }
+
+    &>div:last-of-type input {
+      margin-bottom: 20px;
+
+      &~button {
+        float: right;
+      }
+    }
+
+    &>div {
+      &>h4 {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+span {
+  padding-right: 15px;
+}
+
+@keyframes mymove {
+  0% {opacity: 1;}
+  50% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+.success {
+  color: green;
+  animation: mymove 5s ;
+}
+
+.error {
+  color: red;
+  animation: mymove 5s ;
+}
+
+
