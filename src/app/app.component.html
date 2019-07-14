@@ -1,6 +1,6 @@
 <div>
   <header>
-    <button type="button" (click)="slideBar.toggleSlideBar(); toggleSection()"
+    <button type="button" (click)="toggleSection()"
       class="btn btn-default btn-sm hamburger hamburger--arrowalt js-hamburger"
       [ngClass]="{'is-active': isSlideBarOpen}">
       <span class="hamburger-box">
@@ -10,20 +10,24 @@
   </header>
   <div>
     <nav>
-      <app-aside-panel #slideBar (showMapEvent)="setMap($event); $event == false ? op.hide($event) : op.show($event) "
-        (newWeatherIdEvent)="current.onNewWeatherIdEvent($event); fiveDay.onNewWeatherIdEvent($event)">
+      <app-aside-panel (showMapEvent)="setMap($event); $event == false ? op.hide($event) : op.show($event) "
+        (newWeatherIdEvent)="current.onNewWeatherIdEvent($event); fiveDay.onNewWeatherIdEvent($event);">
       </app-aside-panel>
     </nav>
-    <p-overlayPanel #op [style]="{'width':'500px','height':'400px', 'top': '450px', 'left': '30px'}">
-      <p>{{data.name}}</p>
-      <p>{{data.country}}</p>
+    <p-overlayPanel #op [style]="{'width': '500px','height': '370px','top': '365px', 'left': '40px'}">
+      <div class="city-namie-box">
+          <p>City: <b>{{data.name}}</b></p>
+          <p>Country: <b>{{data.country}}</b></p>
+      </div>
       <ng-template app-map></ng-template>
     </p-overlayPanel>
-    <section #currentSection>
-      <app-current-weather #current></app-current-weather>
-    </section>
-    <section #fiveDaySection>
-      <app-five-day-weather #fiveDay></app-five-day-weather>
-    </section>
+    <div id="sectionBox" #section>
+      <section>
+        <app-current-weather #current></app-current-weather>
+      </section>
+      <section>
+        <app-five-day-weather #fiveDay></app-five-day-weather>
+      </section>
+    </div>
   </div>
 </div>

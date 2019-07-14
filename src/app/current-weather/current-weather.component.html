@@ -4,53 +4,60 @@
   </p>
 </div>
 <div *ngIf="isAvailableData">
-  <div class="weather-box">
+  <div class="weather-box ">
     <h1>Current weather</h1>
-    <div>
-      <div>
-        <p>{{currentDate}}</p>
-        <img src="http://openweathermap.org/img/wn/{{currentViewWeather.weather[0].icon}}@2x.png">
-        <h1>{{(currentViewWeather.main.temp - 273.15).toFixed(0)}}°C</h1>
+    <hr>
+    <div class="ui-g">
+      <div class="ui-g-12 ui-md-6 ui-lg-4 ui-g">
+        <p class="ui-g-12">{{dayWeather.date}}</p>
+        <p class="ui-g-12">{{dayWeather.mainDescription}}</p>
+        <div class="ui-g-12 ui-md-5">
+          <img src={{dayWeather.picture}}>
+          <h1>{{dayWeather.temp}}°C</h1>
+        </div>
+        <div class="ui-g-12 ui-md-7 table-div">
+          <table>
+            <tr *ngIf="dayWeather.wind">
+              <td>Wind</td>
+              <th>{{dayWeather.wind.speed}} km/h
+                <img #arrow src="../../assets/left-arrow.png">
+              </th>
+            </tr>
+            <tr>
+              <td>Pressure</td>
+              <th>{{dayWeather.pressure}} hPa</th>
+            </tr>
+            <tr>
+              <td>Humidity</td>
+              <th>{{dayWeather.humidity}}%</th>
+            </tr>
+            <tr *ngIf="dayWeather.clouds">
+              <td>Clouds</td>
+              <th>{{dayWeather.clouds.all}}%</th>
+            </tr>
+            <tr *ngIf="dayWeather.visibility">
+              <td>Visibility</td>
+              <th>{{dayWeather.visibility}} m</th>
+            </tr>
+            <tr *ngIf="dayWeather.rain">
+              <td>Rain</td>
+              <th>{{dayWeather.rain['1h'] ? dayWeather.rain['1h']:  dayWeather.rain['3h'] }}
+                mm/cm3
+              </th>
+            </tr>
+            <tr *ngIf="dayWeather.snow">
+              <td>Rain</td>
+              <th>{{dayWeather.snow['1h'] ? dayWeather.snow['1h'] : dayWeather.snow['3h'] }} mm/cm3</th>
+            </tr>
+          </table>
+        </div>
       </div>
-      <div>
-        <table>
-          <tr *ngIf="currentViewWeather.wind">
-            <td>Wind</td>
-            <th>{{currentViewWeather.wind.speed}} km/h
-              <img id="arrow" src="../../assets/left-arrow.png">
-            </th>
-          </tr>
-          <tr>
-            <td>Pressure</td>
-            <th>{{currentViewWeather.main.pressure}} hPa</th>
-          </tr>
-          <tr>
-            <td>Humidity</td>
-            <th>{{currentViewWeather.main.humidity}}%</th>
-          </tr>
-          <tr *ngIf="currentViewWeather.clouds">
-            <td>Clouds</td>
-            <th>{{currentViewWeather.clouds.all}}%</th>
-          </tr>
-          <tr *ngIf="currentViewWeather.visibility">
-            <td>Visibility</td>
-            <th>{{currentViewWeather.visibility}} m</th>
-          </tr>
-          <tr *ngIf="currentViewWeather.rain">
-            <td>Rain</td>
-            <th>{{currentViewWeather.rain['1h'] ? currentViewWeather.rain['1h']:  currentViewWeather.rain['3h'] }}
-              mm/cm3
-            </th>
-          </tr>
-          <tr *ngIf="currentViewWeather.snow">
-            <td>Rain</td>
-            <th>{{currentViewWeather.snow['1h'] ?currentViewWeather.snow['1h'] : currentViewWeather.snow['3h'] }} mm/cm3</th>
-          </tr>
-        </table>
+      <div class="ui-g-12 ui-md-6 ui-lg-8 ui-g">
+        <h5 class="ui-g-12 ui-lg-6">City: <b>{{dayWeather.name}}</b></h5>
+        <h5 class="ui-g-12 ui-lg-6">Country: <b>{{dayWeather.country}}</b></h5>
+        <p-gmap  class="ui-g-12" #gmap *ngIf="isMapActive" [styleClass]="'ui-g-12'" [style]="{'height':'165px'}" [options]="options">
+        </p-gmap>
       </div>
-    </div>
-    <div class="map">
-      <p-gmap #gmap [options]="options" [style]="{'width':'100%','height':'100%'}"></p-gmap>
     </div>
   </div>
 </div>

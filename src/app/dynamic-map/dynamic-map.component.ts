@@ -1,7 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { ICity } from "../services/checking-weather/typings";
-
-
+import { ICity } from "../../typings/typings";
 
 @Component({
   selector: "app-dynamic-map",

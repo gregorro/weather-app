@@ -65,10 +65,10 @@ app.get("/cities", function(req, res) {
       isFound = true;
       break;
     } else if (
-      cities[mid].name.toLowerCase().localeCompare(query.toLowerCase()) < 0
+      cities[mid].name.toLowerCase().localeCompare(query.toLowerCase(), 'en', {sensitivity: 'case'}) < 0
     )
-      start = mid + 1;
-    else end = mid - 1;
+      start = mid - 1;
+    else end = mid + 1;
   }
   isFound ? null : (filteredCities = []);
 

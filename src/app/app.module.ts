@@ -11,13 +11,13 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { GMapModule } from 'primeng/gmap';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { MatSelectModule } from '@angular/material/select';
 // import { MenuItem } from 'primeng/api';
 
 import { AppComponent } from './app.component';
 import { CurrentWeatherComponent } from './current-weather/current-weather.component';
 import { FiveDayWeatherComponent } from './five-day-weather/five-day-weather.component';
 import { AsidePanelComponent } from './aside-panel/aside-panel.component';
-
 import { CheckingWeatherService } from './services/checking-weather/checking-weather.service';
 import { DynamicMapComponent } from './dynamic-map/dynamic-map.component';
 
@@ -42,7 +42,8 @@ import { DynamicMapComponent } from './dynamic-map/dynamic-map.component';
     InputTextModule,
     ButtonModule,
     GMapModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    MatSelectModule
   ],
   entryComponents: [DynamicMapComponent],
   providers: [CheckingWeatherService],

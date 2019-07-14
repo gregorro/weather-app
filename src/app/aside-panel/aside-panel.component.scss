@@ -1,10 +1,16 @@
-h4 {
+h4, p {
   color: white;
 }
 
+.open-aside-bar{
+  transform: translateX(400px);
+  opacity: 1;
+  visibility: visible;
+}
 
 div.conteiner {
   position: fixed;
+  z-index: 1;
   height: 100%;
   width: 400px;
   background-color: rgba(71, 129, 193, 0.3);
@@ -28,8 +34,14 @@ div.conteiner {
     &>div:last-of-type input {
       margin-bottom: 20px;
 
-      &~button {
-        float: right;
+      &~div {
+        * {
+          display: inline-block;
+        }
+
+        button {
+          float: right;
+        }
       }
     }
 
@@ -41,24 +53,45 @@ div.conteiner {
   }
 }
 
+.open-weather-link {
+  float: right;
+  bottom: 55px;
+  position: fixed;
+  left: 180px;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      color: rgba(136, 141, 137, 0.5);
+    }
+  }
+}
+
 span {
   padding-right: 15px;
 }
 
 @keyframes mymove {
-  0% {opacity: 1;}
-  50% {opacity: 1;}
-  100% {opacity: 0;}
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
 .success {
   color: green;
-  animation: mymove 5s ;
+  animation: mymove 5s;
 }
 
 .error {
   color: red;
-  animation: mymove 5s ;
+  animation: mymove 5s;
 }
-
-

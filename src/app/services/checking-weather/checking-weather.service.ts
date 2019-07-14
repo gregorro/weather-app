@@ -1,8 +1,9 @@
+import { ISelectOption } from './../../../typings/typings.d';
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import * as appKeyJson from "./app-key.json";
 import { Observable } from "rxjs";
-import { IWeather, ICity } from './typings.js';
+import { IWeather } from '../../../typings/typings.js';
 
 @Injectable({
   providedIn: "root"
@@ -39,6 +40,13 @@ export class CheckingWeatherService {
       .catch(err => {
         console.log("false");
       });*/
+  }
+
+  getWeatherOption(): ISelectOption[] {
+    return [{
+      value: '0',
+      viewValue: 'Days'
+    }] as ISelectOption[]
   }
 
   getCurrentWeather(cityId: number): Observable<object> {

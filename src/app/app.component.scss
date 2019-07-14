@@ -10,6 +10,13 @@ header {
   top: 0px;
   left: 0px;
   z-index: 1;
+  transition: 1.5s;
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.city-namie-box p{
+  display: inline-block;
+  width: 50%;
 }
 
 button span{
@@ -22,9 +29,21 @@ main{
   }
 }
 
-section{
-  padding: 60px 0 0 0;
+#sectionBox{
   transition: 1.5s;
   transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-  margin: 0  0 0 80px;
+}
+
+section{
+  margin: 0 auto;
+  max-width: 1500px;
+  padding: 0 50px;
+}
+
+section:first-of-type{
+  padding-top:80px;
+}
+
+section:nth-last-of-type(1){
+  padding-top:30px;
 }

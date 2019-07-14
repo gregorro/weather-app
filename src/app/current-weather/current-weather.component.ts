@@ -1,45 +1,43 @@
-import {
-  IWeather,
-  IWind,
-  ISnow,
-  IRain,
-} from "./../services/checking-weather/typings.d";
+import { IWeatherPackage } from './../../typings/typings.d';
+import { IWeather } from "../../typings/typings";
 import { CheckingWeatherService } from "./../services/checking-weather/checking-weather.service";
-import { Component, ViewChild, ElementRef, DoCheck } from "@angular/core";
-
-export interface IWeatherPackage {
-  picture: string;
-  description: string;
-  wind: IWind | null;
-  snow: ISnow | null;
-  rain: IRain | null;
-  humidity: number;
-  pressure: number;
-  temp: number;
-}
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  AfterViewChecked
+} from "@angular/core";
 
 @Component({
   selector: "app-current-weather",
   templateUrl: "./current-weather.component.html",
   styleUrls: ["./current-weather.component.scss"]
 })
-export class CurrentWeatherComponent implements DoCheck {
-  constructor(private http: CheckingWeatherService) {}
+export class CurrentWeatherComponent implements AfterViewChecked {
+  constructor(private http: CheckingWeatherService) {
+    this.isAvailableData = false;
+    this.isMapActive = false;
+  }
 
-  isAvailableData: boolean = false;
-  currentViewWeather: IWeather = null;
+  isAvailableData: boolean;
+  isMapActive: boolean;
   currentDate: string;
   options: any;
+  dayWeather: IWeatherPackage;
 
-  ngDoCheck() {
-    const arrow: HTMLElement = document.getElementById("arrow");
-    if (arrow && this.currentViewWeather) {
-      arrow.style.transform = `rotate(${this.currentViewWeather.wind.deg}deg)`;
+
+  @ViewChild("arrow", { read: ElementRef }) arrow: ElementRef;
+
+  ngAfterViewChecked() {
+    if (this.arrow && this.dayWeather) {
+      this.arrow.nativeElement.style.transform = `rotate(${
+        this.dayWeather.wind.deg
+      }deg)`;
 
       const body: HTMLCollectionOf<
         HTMLBodyElement
       > = document.getElementsByTagName("body");
-      const id: string = this.currentViewWeather.weather[0].id.toString();
+      const id: string = this.dayWeather.weatherId.toString();
       switch (id) {
         case "200":
         case "201":
@@ -105,40 +103,62 @@ export class CurrentWeatherComponent implements DoCheck {
           break;
         case "801":
         case "802":
+          body[0].classList.value = "clouds-weather";
+          break;
         case "803":
         case "804":
-          body[0].classList.value = "clouds-weather";
+          body[0].classList.value = "clouds2-weather";
           break;
       }
     }
   }
 
+  setDaysWeather(currentViewWeather: IWeather) {
+    this.dayWeather = {
+      picture: `http://openweathermap.org/img/wn/${
+        currentViewWeather.weather[0].icon
+      }@2x.png`,
+      mainDescription: currentViewWeather.weather[0].main,
+      description: currentViewWeather.weather[0].description,
+      wind: currentViewWeather.wind ? currentViewWeather.wind : null,
+      snow: currentViewWeather.snow ? currentViewWeather.snow : null,
+      rain: currentViewWeather.rain ? currentViewWeather.rain : null,
+      humidity: currentViewWeather.main.humidity,
+      pressure: currentViewWeather.main.pressure.toFixed(),
+      temp: (currentViewWeather.main.temp - 273.15).toFixed(),
+      time: currentViewWeather.dt,
+      weatherId: currentViewWeather.weather[0].id,
+      name: currentViewWeather.name,
+      country: currentViewWeather.sys.country,
+      date: new Date(currentViewWeather.dt * 1000).toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      })
+    };
+  }
+
   onNewWeatherIdEvent(id) {
+    this.isMapActive = false;
     if (id > 0) {
       this.http
         .getCurrentWeather(id)
         .toPromise()
         .then((data: IWeather) => {
-          this.currentViewWeather = data;
-          this.currentDate = new Date(
-            this.currentViewWeather.dt * 1000
-          ).toLocaleDateString("en-US", {
-            weekday: "long",
-            year: "numeric",
-            month: "short",
-            day: "numeric"
-          });
+          this.setDaysWeather(data);
           this.options = {
-            center: { lat: data.coord.lat , lng: data.coord.lon },
+            center: { lat: data.coord.lat, lng: data.coord.lon },
             zoom: 12
           };
+          this.isMapActive = true;
           this.isAvailableData = true;
         })
         .catch(err => {
           console.error(err);
         });
     }
-    if ((id = -1)) {
+    if ((id === -1)) {
       this.isAvailableData = false;
     }
   }

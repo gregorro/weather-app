@@ -1,11 +1,9 @@
 import { CheckingWeatherService } from "./../services/checking-weather/checking-weather.service";
-import { ICity, ICoord } from "./../services/checking-weather/typings.d";
+import { ICity } from "../../typings/typings";
 import {
   Component,
   Output,
   EventEmitter,
-  ViewChild,
-  ElementRef,
   AfterViewChecked
 } from "@angular/core";
 import { SelectItem } from "primeng/api";
@@ -44,7 +42,6 @@ export class AsidePanelComponent implements AfterViewChecked {
 
   @Output() newWeatherIdEvent: EventEmitter<number> = new EventEmitter();
   @Output() showMapEvent: EventEmitter<ICity | boolean> = new EventEmitter();
-  @ViewChild("conteiner", { read: ElementRef }) slideBar: ElementRef;
 
   async filterCities(event): Promise<void> {
     let query: string = event.query;
@@ -79,21 +76,6 @@ export class AsidePanelComponent implements AfterViewChecked {
     }
   }
 
-  deleteCity(e, city: SelectItem) {
-    e.stopPropagation();
-    (<ICity>city.value).id == this.selectedCity.id
-      ? this.newWeatherIdEvent.emit(-1)
-      : null;
-
-    this.citesList = this.citesList.filter(element => {
-      return (<ICity>element.value).id !== (<ICity>city.value).id;
-    });
-
-    if (this.citesList.length == 0) {
-      this.citesList.push(this.firstCityPlaceholder);
-      this.isAnyCity = false;
-    }
-  }
 
   hideMap(){
     this.startChangeDetection = false;
@@ -105,7 +87,7 @@ export class AsidePanelComponent implements AfterViewChecked {
       this.isAnyCity = !this.isAnyCity;
       this.citesList.shift();
     }
-
+    this.hideMap();
     let isReplay = false;
     this.citesList.forEach(value => {
       (<ICity>value.value).id == this.city.id ? (isReplay = true) : null;
@@ -120,19 +102,20 @@ export class AsidePanelComponent implements AfterViewChecked {
     this.city = null;
   }
 
-  toggleSlideBar(): void {
-    if (!this.isSlideBarOpen) {
-      (<HTMLElement>this.slideBar.nativeElement).style.transform =
-        "translateX(0)";
-      (<HTMLElement>this.slideBar.nativeElement).style.opacity = "1";
-      (<HTMLElement>this.slideBar.nativeElement).style.visibility = "visible";
-    } else {
-      (<HTMLElement>this.slideBar.nativeElement).style.transform =
-        "translateX(-500px)";
-      (<HTMLElement>this.slideBar.nativeElement).style.opacity = "0";
-      (<HTMLElement>this.slideBar.nativeElement).style.visibility = "hidden";
+  deleteCity(e, city: SelectItem) {
+    e.stopPropagation();
+    (<ICity>city.value).id == this.selectedCity.id
+      ? this.newWeatherIdEvent.emit(-1)
+      : null;
+
+    this.citesList = this.citesList.filter(element => {
+      return (<ICity>element.value).id !== (<ICity>city.value).id;
+    });
+
+    if (this.citesList.length == 0) {
+      this.citesList.push(this.firstCityPlaceholder);
+      this.isAnyCity = false;
     }
-    this.isSlideBarOpen = !this.isSlideBarOpen;
   }
 
   showWeather(event): void {

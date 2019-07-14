@@ -2,25 +2,54 @@
   color: white;
 }
 
-.weather > div{
-  display: inline-block;
-  width: 19%;
-  margin-right: 10px;
-  transform: 1s;
-  &:last-of-type{
-    margin-right: 0;
-  }
-  &:hover{
-    background-color: rgba(0,0,0, 0.4);
-    cursor: pointer;
+.weather {
+  margin: 0 auto;
+
+  &>div {
+    transform: 1s;
+
+    &>div {
+      transition: 1s;
+      transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }
 
-.weather ~ div > div {
-  display: inline-block;
-  margin-right: 10px;
-  width: 11.5%;
-  &:last-of-type{
-    margin-right: 0;
+.forecast-header {
+  h1 {
+    display: inline-block;
+  }
+  mat-form-field{
+    margin-left: 50px;
+  }
+}
+
+
+.hour-view {
+  margin-top: 30px;
+
+  & div {
+
+    p,
+    tr,
+    th {
+      font-size: 0.8em;
+    }
+
+    h1 {
+      font-size: 1.5em;
+    }
+
+    img.weather-icon-hour {
+      width: 70px;
+    }
+
+    img.arrow-hour {
+      width: 20px;
+    }
   }
 }

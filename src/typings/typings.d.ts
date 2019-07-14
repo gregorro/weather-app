@@ -2,6 +2,30 @@ export interface IAppKey {
   key: string;
 }
 
+export interface IWeatherPackage {
+  picture: string;
+  mainDescription: string;
+  description: string;
+  wind: IWind | null;
+  snow: ISnow | null;
+  rain: IRain | null;
+  humidity: number;
+  pressure: string;
+  temp: string;
+  time: number;
+  date: string;
+  text?: string;
+  weatherId?: number;
+  name?: string;
+  country?: string;
+}
+export interface ISelectOption{
+  value: string;
+  viewValue: string;
+}
+
+///////////////////
+
 export interface IWeather {
   coord: ICoord;
   weather:  IWeatherDetails | IWeatherDetails[];
