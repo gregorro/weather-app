@@ -6,6 +6,10 @@ body{
   }
 }
 
+p.open-weather-link a{
+    color: orange;
+  }
+
 body::before {
   content: "";
   display: block;
@@ -29,6 +33,11 @@ body::before {
 span.mat-select-value-text, .mat-select-arrow{
   color: white;
 }
+
+.mat-slide-toggle-content{
+  color: white;
+}
+
 
 table td:first-of-type {
   padding-right: 10px;
@@ -58,6 +67,7 @@ body.thunderstorm-weather {
   &::before {
     background: $thunderstorm-background no-repeat center center;
     background-size: cover;
+    filter: blur(3px);
   }
 
   header {
@@ -66,6 +76,14 @@ body.thunderstorm-weather {
 
   #aside-bar {
     background-color: $thunderstorm-weather;
+  }
+
+  header.darken {
+    background-color: rgba(darken($thunderstorm-weather, 10%), 0.8);
+  }
+
+  #aside-bar.darken {
+    background-color: rgba(darken($thunderstorm-weather, 10%), 0.8);
   }
 
   .weather > div > div:hover{
@@ -84,6 +102,8 @@ body.drizzle-weather {
   &::before {
     background: $drizzle-background no-repeat center center;
     background-size: cover;
+    background-color: rgba(255,255,255,0.4);
+    background-blend-mode: lighten;
   }
 
   header {
@@ -92,6 +112,14 @@ body.drizzle-weather {
 
   #aside-bar {
     background-color: $drizzle-weather;
+  }
+
+  header.darken {
+    background-color: rgba(darken($drizzle-weather, 10%), 0.8);
+  }
+
+  #aside-bar.darken {
+    background-color: rgba(darken($drizzle-weather, 10%), 0.8);
   }
 
   .weather > div > div:hover{
@@ -114,6 +142,14 @@ body.rain-weather {
     background-color: $rain-weather;
   }
 
+  header.darken {
+    background-color: rgba(darken($rain-weather, 10%), 0.8);
+  }
+
+  #aside-bar.darken {
+    background-color: rgba(darken($rain-weather, 10%), 0.8);
+  }
+
   .weather > div > div:hover{
     background-color: $rain-weather;
   }
@@ -130,6 +166,7 @@ body.snow-weather {
   &::before {
     background: $snow-background no-repeat center center;
     background-size: cover;
+    filter: blur(3px);
   }
 
   header {
@@ -138,6 +175,14 @@ body.snow-weather {
 
   #aside-bar {
     background-color: $snow-weather;
+  }
+
+  header.darken {
+    background-color: rgba(darken($snow-weather, 10%), 0.8);
+  }
+
+  #aside-bar.darken {
+    background-color: rgba(darken($snow-weather, 10%), 0.8);
   }
 
   .weather > div > div:hover{
@@ -159,6 +204,14 @@ body.atmosphere-weather {
     background-color: $atmosphere-weather;
   }
 
+  header.darken {
+    background-color: rgba(darken($atmosphere-weather, 10%), 0.8);
+  }
+
+  #aside-bar.darken {
+    background-color: rgba(darken($atmosphere-weather, 10%), 0.8);
+  }
+
   .weather > div > div:hover{
     background-color: $atmosphere-weather;
   }
@@ -168,6 +221,8 @@ body.clear-weather {
   &::before {
     background: $clear-background no-repeat center center;
     background-size: cover;
+    background-color: rgba(0,0,0,0.3);
+    background-blend-mode: hue;
   }
 
   header {
@@ -176,6 +231,14 @@ body.clear-weather {
 
   #aside-bar {
     background-color: $clear-weather;
+  }
+
+  header.darken {
+    background-color: rgba(darken($clear-weather, 10%), 0.8);
+  }
+
+  #aside-bar.darken {
+    background-color:  rgba(darken($clear-weather, 10%), 0.8);
   }
 
   .weather > div > div:hover{
@@ -188,6 +251,7 @@ body.clouds-weather {
     background: rgba(108, 108, 146, 0.4) $clouds-background no-repeat center center;
     background-size: cover;
     background-blend-mode: darken;
+    filter: blur(2px);
   }
 
   header {
@@ -196,6 +260,14 @@ body.clouds-weather {
 
   #aside-bar {
     background-color: $clouds-weather;
+  }
+
+  header.darken {
+    background-color: rgba(darken($clouds-weather, 10%), 0.8);
+  }
+
+  #aside-bar.darken {
+    background-color: rgba(darken($clouds-weather, 10%), 0.8);
   }
 
   .weather > div > div:hover{
@@ -207,6 +279,8 @@ body.clouds2-weather {
   &::before {
     background: $clouds2-background no-repeat center center;
     background-size: cover;
+    background-color: rgba(0,0,0, 0.3);
+    background-blend-mode: hue;
   }
 
   header {
@@ -215,6 +289,14 @@ body.clouds2-weather {
 
   #aside-bar {
     background-color: $clouds2-weather;
+  }
+
+  header.darken {
+    background-color: rgba(darken($clouds2-weather, 10%), 0.8);
+  }
+
+  #aside-bar.darken {
+    background-color: rgba(darken($clouds2-weather, 10%), 0.8);
   }
 
   .weather > div > div:hover{
@@ -304,4 +386,16 @@ body .ui-button.ui-button-icon-only {
     bottom: 0;
     position: absolute;
   }
+}
+
+div#aside-bar.open-aside-bar{
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+div#aside-bar.close-aside-bar{
+  transform: translateX(-400px);
+  opacity: 0;
+  visibility: hidden;
 }

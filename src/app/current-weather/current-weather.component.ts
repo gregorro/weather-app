@@ -17,6 +17,8 @@ export class CurrentWeatherComponent implements AfterViewChecked {
   constructor(private http: CheckingWeatherService) {
     this.isAvailableData = false;
     this.isMapActive = false;
+    this.isStart = true;
+    this.isBlackText = false;
   }
 
   isAvailableData: boolean;
@@ -24,11 +26,16 @@ export class CurrentWeatherComponent implements AfterViewChecked {
   currentDate: string;
   options: any;
   dayWeather: IWeatherPackage;
+  isStart: boolean;
+  isBlackText: boolean;
 
 
   @ViewChild("arrow", { read: ElementRef }) arrow: ElementRef;
 
   ngAfterViewChecked() {
+    const doc = document.getElementsByTagName('body')[0];
+    doc.className === 'drizzle-weather' || doc.className === 'snow-weather'  ? this.isBlackText = true: this.isBlackText = false;
+
     if (this.arrow && this.dayWeather) {
       this.arrow.nativeElement.style.transform = `rotate(${
         this.dayWeather.wind.deg
@@ -114,6 +121,7 @@ export class CurrentWeatherComponent implements AfterViewChecked {
   }
 
   setDaysWeather(currentViewWeather: IWeather) {
+    this.isStart = false;
     this.dayWeather = {
       picture: `http://openweathermap.org/img/wn/${
         currentViewWeather.weather[0].icon

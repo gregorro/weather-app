@@ -1,4 +1,4 @@
-$thema-color: rgba(71, 129, 193, 0.3);
+$thema-color: rgba(71, 129, 193, 0.8);
 $text-color:white;
 
 header {
@@ -12,38 +12,70 @@ header {
   z-index: 1;
   transition: 1.5s;
   transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &>mat-slide-toggle {
+    margin-left: 20px;
+  }
 }
 
-.city-namie-box p{
+
+
+.city-namie-box p {
   display: inline-block;
   width: 50%;
 }
 
-button span{
+button span {
   font-size: 10px;
 }
 
-main{
-  > div{
+main {
+  >div {
     padding: 50px 0 0 0;
   }
 }
 
-#sectionBox{
+#sectionBox {
   transition: 1.5s;
   transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &>div {
+    max-width: 1500px;
+    margin: 80px auto;
+  }
 }
 
-section{
+section {
   margin: 0 auto;
   max-width: 1500px;
   padding: 0 50px;
 }
 
-section:first-of-type{
-  padding-top:80px;
+section:first-of-type {
+  padding-top: 80px;
 }
 
-section:nth-last-of-type(1){
-  padding-top:30px;
+section:nth-last-of-type(1) {
+  padding-top: 30px;
 }
+
+.jumbotron {
+  opacity: 0.85;
+  margin: 0 50px;
+}
+
+@media only screen and (max-width: 600px) {
+  section:first-of-type {
+    padding-top: 50px;
+  }
+  section{
+    padding: 0 20px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  section{
+    padding: 0 10px;
+  }
+}
+

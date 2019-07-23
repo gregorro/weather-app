@@ -7,21 +7,35 @@
         <span class="hamburger-inner"></span>
       </span>
     </button>
+    <mat-slide-toggle *ngIf="isSlideVisible"  (change)="onChangeSlide($event)" color="accent" [checked]="isSlideChecked"
+       [disabled]="isSlideDisabled">
+      Sliding page view
+    </mat-slide-toggle>
   </header>
   <div>
     <nav>
       <app-aside-panel (showMapEvent)="setMap($event); $event == false ? op.hide($event) : op.show($event) "
-        (newWeatherIdEvent)="current.onNewWeatherIdEvent($event); fiveDay.onNewWeatherIdEvent($event);">
+        (newWeatherIdEvent)="current.onNewWeatherIdEvent($event); fiveDay.onNewWeatherIdEvent($event); isStart=false ">
       </app-aside-panel>
     </nav>
     <p-overlayPanel #op [style]="{'width': '500px','height': '370px','top': '365px', 'left': '40px'}">
       <div class="city-namie-box">
-          <p>City: <b>{{data.name}}</b></p>
-          <p>Country: <b>{{data.country}}</b></p>
+        <p>City: <b>{{data.name}}</b></p>
+        <p>Country: <b>{{data.country}}</b></p>
       </div>
       <ng-template app-map></ng-template>
     </p-overlayPanel>
     <div id="sectionBox" #section>
+      <div *ngIf="isStart">
+        <div class="jumbotron">
+          <h1 class="display-4">Hello, user!</h1>
+          <p class="lead">
+              This is a simple weather app with which you will know what the weather is currently in every place on earth.</p>
+          <hr class="my-4">
+          <p>The application offers the opportunity to observe many different cities and change the code of the application needed to get access to the OpenWeather service.</p>
+          <a class="btn btn-primary btn-lg" href="#" (click)="toggleSection(false)" role="button">Get started</a>
+        </div>
+      </div>
       <section>
         <app-current-weather #current></app-current-weather>
       </section>

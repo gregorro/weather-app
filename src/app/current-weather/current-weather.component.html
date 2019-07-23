@@ -1,26 +1,27 @@
-<div *ngIf="!isAvailableData">
-  <p>
-    Wybierz miasto by wyświetlić dane.
-  </p>
+<div *ngIf="!isAvailableData && !isStart">
+  <h1 class="no-data-text">
+    <b>Select city to display data.</b>
+  </h1>
 </div>
 <div *ngIf="isAvailableData">
   <div class="weather-box ">
     <h1>Current weather</h1>
     <hr>
     <div class="ui-g">
-      <div class="ui-g-12 ui-md-6 ui-lg-4 ui-g">
-        <p class="ui-g-12">{{dayWeather.date}}</p>
+      <div class="weather-details ui-g-12 ui-sm-12 ui-md-4 ui-g">
+        <p class="ui-g-12"><b>{{dayWeather.date}}</b></p>
         <p class="ui-g-12">{{dayWeather.mainDescription}}</p>
-        <div class="ui-g-12 ui-md-5">
+        <div class="ui-md-12 ui-lg-5">
           <img src={{dayWeather.picture}}>
           <h1>{{dayWeather.temp}}°C</h1>
         </div>
-        <div class="ui-g-12 ui-md-7 table-div">
+        <div class="ui-md-12 ui-lg-7 table-div">
           <table>
             <tr *ngIf="dayWeather.wind">
               <td>Wind</td>
-              <th>{{dayWeather.wind.speed}} km/h
-                <img #arrow src="../../assets/left-arrow.png">
+              <th [ngSwitch]="isBlackText">{{dayWeather.wind.speed}} km/h
+                <img *ngSwitchCase="true" #arrow src="../../assets/left-arrow.png">
+                <img *ngSwitchDefault #arrow src="../../assets/left-arrow-white.png">
               </th>
             </tr>
             <tr>
@@ -52,10 +53,11 @@
           </table>
         </div>
       </div>
-      <div class="ui-g-12 ui-md-6 ui-lg-8 ui-g">
-        <h5 class="ui-g-12 ui-lg-6">City: <b>{{dayWeather.name}}</b></h5>
-        <h5 class="ui-g-12 ui-lg-6">Country: <b>{{dayWeather.country}}</b></h5>
-        <p-gmap  class="ui-g-12" #gmap *ngIf="isMapActive" [styleClass]="'ui-g-12'" [style]="{'height':'165px'}" [options]="options">
+      <div class="map-box ui-g-12 ui-sm-12 ui-md-8 ui-g">
+        <h5 class="ui-g-6">City: <b>{{dayWeather.name}}</b></h5>
+        <h5 class="ui-g-6">Country: <b>{{dayWeather.country}}</b></h5>
+        <p-gmap class="ui-g-12" #gmap *ngIf="isMapActive" [styleClass]="'ui-g-12'"
+          [style]="{'height':'100%', 'border': '1px black solid'}" [options]="options">
         </p-gmap>
       </div>
     </div>

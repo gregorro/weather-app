@@ -2,6 +2,10 @@ export interface IAppKey {
   key: string;
 }
 
+export interface MatSlideEvent{
+  checked: boolean;
+}
+
 export interface IWeatherPackage {
   picture: string;
   mainDescription: string;

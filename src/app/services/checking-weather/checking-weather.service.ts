@@ -25,10 +25,7 @@ export class CheckingWeatherService {
     // update app key
 
     /* this.http
-      .post("/pathToUpdateKeyInJson", {
-        headers: new HttpHeaders({
-          Accept: "application/json"
-        }),
+      .post("http://localhost:3001/key", {
         params: {
           key: value
         }
@@ -68,7 +65,7 @@ export class CheckingWeatherService {
   }
 
   getCityList(query: string): Observable<object> {
-    return this.http.get("http://localhost:3001/cities", {
+    return this.http.get("https://secret-castle-75808.herokuapp.com/cities", {
       params: {
         query: query,
       }

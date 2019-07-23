@@ -2,24 +2,19 @@ h4, p {
   color: white;
 }
 
-.open-aside-bar{
-  transform: translateX(400px);
-  opacity: 1;
-  visibility: visible;
-}
-
 div.conteiner {
   position: fixed;
   z-index: 1;
   height: 100%;
-  width: 400px;
-  background-color: rgba(71, 129, 193, 0.3);
+  background-color: rgba(71, 129, 193, 0.8);
   margin-top: 50px;
+  width: 400px;
   box-sizing: border-box;
   transition: 1.5s;
   transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-  transform: translateX(-500px);
+  transform: translateX(-400px);
   opacity: 0;
+  top: 0;
   visibility: hidden;
 
   &>div {
@@ -54,10 +49,9 @@ div.conteiner {
 }
 
 .open-weather-link {
-  float: right;
   bottom: 55px;
   position: fixed;
-  left: 180px;
+  right: 10px;
 
   a {
     text-decoration: none;
@@ -94,4 +88,10 @@ span {
 .error {
   color: red;
   animation: mymove 5s;
+}
+
+@media only screen and (max-width: 400px) {
+  div.conteiner {
+    width: 100%;
+  }
 }

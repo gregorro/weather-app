@@ -1,8 +1,3 @@
-<div *ngIf="!isAvailableData">
-  <p>
-    Wybierz miasto by wyświetlić dane.
-  </p>
-</div>
 <div class="weather" *ngIf="isAvailableData">
   <div class="forecast-header">
     <h1>Forecast</h1>
@@ -18,44 +13,50 @@
   <hr>
   <div class="p-grid">
     <div class="p-col" *ngFor="let day of daysWeather; index as i" (click)="setHourWeather(i)">
-      <p>{{day.date}}</p>
+      <p><b>{{day.date}}</b></p>
       <p>{{day.mainDescription}}</p>
-      <img class="weather-icon-day" src={{day.picture}}>
-      <h1>{{day.temp}}°C</h1>
-      <table>
-        <tr *ngIf="day.wind">
-          <td>Wind</td>
-          <th>{{day.wind.speed}} km/h
-            <img id="arrow-{{i}}" class="arrow-day" src="../../assets/left-arrow.png">
-          </th>
-        </tr>
-        <tr>
-          <td>Pressure</td>
-          <th>{{day.pressure}} hPa</th>
-        </tr>
-        <tr>
-          <td>Humidity</td>
-          <th>{{day.humidity}}%</th>
-        </tr>
-        <tr *ngIf="day.clouds">
-          <td>Clouds</td>
-          <th>{{day.clouds.all}}%</th>
-        </tr>
-        <tr *ngIf="day.rain">
-          <td>Rain</td>
-          <th>
-            {{day.rain['1h'] ? day.rain['1h']:  day.rain['3h'] }}
-            mm/cm3
-          </th>
-        </tr>
-        <tr *ngIf="day.snow">
-          <td>Snow</td>
-          <th>
-            {{day.snow['1h'] ? day.snow['1h'] : day.snow['3h'] }}
-            mm/cm3
-          </th>
-        </tr>
-      </table>
+      <div class="ico-temp">
+        <img class="weather-icon-day" src={{day.picture}}>
+        <h1>{{day.temp}}°C</h1>
+      </div>
+      <div>
+        <table>
+          <tr *ngIf="day.wind">
+            <td>Wind</td>
+            <th [ngSwitch]="isBlackText">{{day.wind.speed}} km/h
+              <img *ngSwitchCase="true" id="arrow-{{i}}" class="arrow-day" src="../../assets/left-arrow.png">
+              <img *ngSwitchDefault id="arrow-{{i}}" class="arrow-day" src="../../assets/left-arrow-white.png">
+            </th>
+          </tr>
+          <tr>
+            <td>Pressure</td>
+            <th>{{day.pressure}} hPa</th>
+          </tr>
+          <tr>
+            <td>Humidity</td>
+            <th>{{day.humidity}}%</th>
+          </tr>
+          <tr *ngIf="day.clouds">
+            <td>Clouds</td>
+            <th>{{day.clouds.all}}%</th>
+          </tr>
+          <tr *ngIf="day.rain">
+            <td>Rain</td>
+            <th>
+              {{day.rain['1h'] ? day.rain['1h']:  day.rain['3h'] }}
+              mm/cm3
+            </th>
+          </tr>
+          <tr *ngIf="day.snow">
+            <td>Snow</td>
+            <th>
+              {{day.snow['1h'] ? day.snow['1h'] : day.snow['3h'] }}
+              mm/cm3
+            </th>
+          </tr>
+        </table>
+      </div>
+
     </div>
   </div>
 </div>
@@ -64,43 +65,48 @@
   <hr>
   <div class="p-grid">
     <div class="p-col" *ngFor="let hour of currentHourWeather; index as i">
-      <p>{{hour.text}}</p>
+      <p><b>{{hour.text}}</b></p>
       <p>{{hour.mainDescription}}</p>
-      <img class="weather-icon-hour" src={{hour.picture}}>
-      <h1>{{hour.temp}}°C</h1>
-      <table>
-        <tr *ngIf="hour.wind">
-          <td>Wind</td>
-          <th>{{hour.wind.speed}} km/h
-            <img id="arrow-{{i+5}}" class="arrow-hour" src="../../assets/left-arrow.png">
-          </th>
-        </tr>
-        <tr>
-          <td>Pressure</td>
-          <th>{{hour.pressure}} hPa</th>
-        </tr>
-        <tr>
-          <td>Humidity</td>
-          <th>{{hour.humidity}}%</th>
-        </tr>
-        <tr *ngIf="hour.clouds">
-          <td>Clouds</td>
-          <th>{{hour.clouds.all}}%</th>
-        </tr>
-        <tr *ngIf="hour.rain">
-          <td>Rain</td>
-          <th>
-            {{hour.rain['1h'] ? hour.rain['1h']:  hour.rain['3h'] }}
-            mm/cm3
-          </th>
-        </tr>
-        <tr *ngIf="hour.snow">
-          <td>Snow</td>
-          <th>
-            {{hour.snow['1h'] ? hour.snow['1h'] : hour.snow['3h'] }} mm/cm3
-          </th>
-        </tr>
-      </table>
+      <div class="ico-temp">
+          <img class="weather-icon-hour" src={{hour.picture}}>
+          <h1>{{hour.temp}}°C</h1>
+      </div>
+      <div class="table-box">
+          <table>
+              <tr *ngIf="hour.wind">
+                <td>Wind</td>
+                <th [ngSwitch]="isBlackText">{{hour.wind.speed}} km/h
+                  <img *ngSwitchCase="true" id="arrow-{{i+5}}" class="arrow-hour" src="../../assets/left-arrow.png">
+                  <img *ngSwitchDefault id="arrow-{{i+5}}" class="arrow-hour" src="../../assets/left-arrow-white.png">
+                </th>
+              </tr>
+              <tr>
+                <td>Pressure</td>
+                <th>{{hour.pressure}} hPa</th>
+              </tr>
+              <tr>
+                <td>Humidity</td>
+                <th>{{hour.humidity}}%</th>
+              </tr>
+              <tr *ngIf="hour.clouds">
+                <td>Clouds</td>
+                <th>{{hour.clouds.all}}%</th>
+              </tr>
+              <tr *ngIf="hour.rain">
+                <td>Rain</td>
+                <th>
+                  {{hour.rain['1h'] ? hour.rain['1h']:  hour.rain['3h'] }}
+                  mm/cm3
+                </th>
+              </tr>
+              <tr *ngIf="hour.snow">
+                <td>Snow</td>
+                <th>
+                  {{hour.snow['1h'] ? hour.snow['1h'] : hour.snow['3h'] }} mm/cm3
+                </th>
+              </tr>
+            </table>
+        </div>
     </div>
   </div>
 </div>

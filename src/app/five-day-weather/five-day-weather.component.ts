@@ -21,8 +21,10 @@ export class FiveDayWeatherComponent implements AfterViewChecked {
     this.isHourWeather = false;
     this.daysWeather = [];
     this.options = this.http.getWeatherOption();
+    this.isBlackText = false;
   }
   isAvailableData: boolean;
+  isBlackText: boolean;
   currentViewWeather: IForecast;
   isHourWeather: boolean;
   currentHourWeather: IWeatherPackage[];
@@ -37,6 +39,9 @@ export class FiveDayWeatherComponent implements AfterViewChecked {
   ngAfterViewChecked() {
     let i = 0;
     let j = 0;
+
+    const doc = document.getElementsByTagName('body')[0];
+    doc.className === 'drizzle-weather' || doc.className === 'snow-weather'  ? this.isBlackText = true: this.isBlackText = false;
 
     if (this.daysWeather) {
       for (let day of this.daysWeather) {
@@ -77,6 +82,7 @@ export class FiveDayWeatherComponent implements AfterViewChecked {
 
     if ((id === -1)) {
       this.isAvailableData = false;
+      this.isHourWeather = false;
     }
   }
 

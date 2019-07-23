@@ -1,3 +1,4 @@
+import { MatSlideEvent } from './../typings/typings.d';
 import { MapDirective } from "./map.directive";
 import { DynamicMapComponent } from "./dynamic-map/dynamic-map.component";
 import {
@@ -5,7 +6,8 @@ import {
   ElementRef,
   ComponentFactoryResolver,
   OnInit,
-  AfterContentChecked
+  AfterContentChecked,
+  HostListener
 } from "@angular/core";
 import { Component } from "@angular/core";
 import { ICity } from "../typings/typings";
@@ -18,6 +20,12 @@ import { ICity } from "../typings/typings";
 export class AppComponent implements OnInit, AfterContentChecked {
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {
     this.isSlideBarOpen = false;
+    this.isSlideChecked = true;
+    this.isSlideDisabled = false;
+    this.isStart = true;
+    this.isSlideVisible = true;
+
+
     this.data = {
       id: null,
       name: "",
@@ -28,15 +36,29 @@ export class AppComponent implements OnInit, AfterContentChecked {
       country: ""
     };
   }
+
+  header: HTMLElement;
   asideBar: HTMLElement;
-  isSlideBarOpen: boolean;
   data: ICity;
+
+  isSlideBarOpen: boolean;
+  isSlideChecked: boolean;
+  isSlideDisabled: boolean;
+  isStart: boolean;
+  isSlideVisible: boolean;
 
   @ViewChild("section", { read: ElementRef }) section: ElementRef;
   @ViewChild(MapDirective) gMap: MapDirective;
 
   ngOnInit() {
     this.asideBar = document.getElementById("aside-bar");
+    this.header = document.getElementsByTagName("header")[0];
+
+    if (window.innerWidth < 1500){
+      this.isSlideVisible = false;
+      this.isSlideChecked = false;
+      this.isSlideDisabled = true;
+    }
   }
 
   ngAfterContentChecked(){
@@ -44,28 +66,56 @@ export class AppComponent implements OnInit, AfterContentChecked {
     const overlayPanel: HTMLElement = document.querySelector(".ui-overlaypanel");
     if (choiceBox && overlayPanel){
       const positionOfChoiceBox: ClientRect = choiceBox.getBoundingClientRect();
-      overlayPanel.style.left = `${positionOfChoiceBox.left}px`;
-      overlayPanel.style.top = `${positionOfChoiceBox.bottom + window.scrollY}px`;
+      if(window.innerWidth < 560){
+        overlayPanel.style.left = `5px`;
+        overlayPanel.style.top = `${positionOfChoiceBox.bottom + window.scrollY}px`;
+        overlayPanel.style.width = `${window.innerWidth - 10}px`;
+      }else{
+        overlayPanel.style.left = `${positionOfChoiceBox.left}px`;
+        overlayPanel.style.top = `${positionOfChoiceBox.bottom + window.scrollY}px`;
+      }
     }
-    if(window.innerWidth >= 1500 && this.isSlideBarOpen)
-    (<HTMLElement>this.section.nativeElement).style.paddingLeft = "400px"
-    if(window.innerWidth < 1500 && this.isSlideBarOpen)
-    (<HTMLElement>this.section.nativeElement).style.paddingLeft = "0"
   }
 
-  toggleSection() {
-      if (!this.isSlideBarOpen) {
-        window.innerWidth > 1500 ? (<HTMLElement>this.section.nativeElement).style.paddingLeft = "400px": null;
-        this.asideBar.style.transform = "translateX(0)";
-        this.asideBar.style.opacity = "1";
-        this.asideBar.style.visibility = "visible";
-      } else {
-       (<HTMLElement>this.section.nativeElement).style.paddingLeft = "0";
-        this.asideBar.style.transform = "translateX(-400px)";
-        this.asideBar.style.opacity = "0";
-        this.asideBar.style.visibility = "hidden";
+  @HostListener('window:resize', ['$event'])
+  onResize(){
+    if(window.innerWidth < 1500){
+      this.isSlideVisible = false;
+      this.isSlideDisabled = true;
+      if(this.isSlideBarOpen){
+        this.asideBar.className = 'conteiner open-aside-bar darken';
+        this.header.className = 'darken';
+        this.section.nativeElement.style.paddingLeft = '0';
+        this.isSlideChecked = false;
       }
-      this.isSlideBarOpen = !this.isSlideBarOpen;
+    }
+
+    if(window.innerWidth >= 1500){
+      this.isSlideVisible = true;
+      this.isSlideDisabled = false;
+    }
+  }
+
+  toggleSection(canClose?: boolean) {
+      if (!this.isSlideBarOpen) {
+       if(this.isSlideChecked){
+        this.section.nativeElement.style.paddingLeft = '400px'
+        this.asideBar.className = 'conteiner open-aside-bar';
+       }else{
+        this.asideBar.className = 'conteiner open-aside-bar darken';
+        this.header.className = 'darken';
+       }
+       this.isSlideBarOpen = !this.isSlideBarOpen;
+      } else if(canClose !== false) {
+        this.asideBar.className = 'conteiner close-aside-bar';
+        this.header.className = '';
+        this.section.nativeElement.style.paddingLeft = '0'
+        this.isSlideBarOpen = !this.isSlideBarOpen;
+      }
+  }
+
+  onChangeSlide(event: MatSlideEvent){
+    this.isSlideChecked = event.checked;
   }
 
   setMap(event: ICity | boolean) {
