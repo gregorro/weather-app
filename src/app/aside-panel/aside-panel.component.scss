@@ -20,7 +20,12 @@ div.conteiner {
   &>div {
     padding-top: 30px;
     width: 80%;
+    height: 85%;
+    overflow: scroll;
     margin: 0 auto;
+    &::-webkit-scrollbar{
+      display: none;
+    }
 
     &>div:not(:last-of-type) {
       margin-bottom: 50px;

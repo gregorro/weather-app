@@ -7,8 +7,7 @@
         <span class="hamburger-inner"></span>
       </span>
     </button>
-    <mat-slide-toggle *ngIf="isSlideVisible"  (change)="onChangeSlide($event)" color="accent" [checked]="isSlideChecked"
-       [disabled]="isSlideDisabled">
+    <mat-slide-toggle *ngIf="isSlideVisible"  (change)="onChangeSlide($event)" color="accent" [checked]="isSlideChecked">
       Sliding page view
     </mat-slide-toggle>
   </header>

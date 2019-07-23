@@ -13,6 +13,7 @@ import { GMapModule } from 'primeng/gmap';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { TooltipModule } from 'primeng/tooltip';
 // import { MenuItem } from 'primeng/api';
 
 import { AppComponent } from './app.component';
@@ -45,7 +46,8 @@ import { DynamicMapComponent } from './dynamic-map/dynamic-map.component';
     GMapModule,
     OverlayPanelModule,
     MatSelectModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    TooltipModule
   ],
   entryComponents: [DynamicMapComponent],
   providers: [CheckingWeatherService],

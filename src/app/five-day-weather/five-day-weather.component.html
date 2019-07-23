@@ -12,7 +12,7 @@
   </div>
   <hr>
   <div class="p-grid">
-    <div class="p-col" *ngFor="let day of daysWeather; index as i" (click)="setHourWeather(i)">
+    <div class="p-col" *ngFor="let day of daysWeather; index as i" (click)="setHourWeather(i)" pTooltip="Click to show hourly weather" tooltipPosition="bottom">
       <p><b>{{day.date}}</b></p>
       <p>{{day.mainDescription}}</p>
       <div class="ico-temp">

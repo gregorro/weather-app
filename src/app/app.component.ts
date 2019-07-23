@@ -21,7 +21,6 @@ export class AppComponent implements OnInit, AfterContentChecked {
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {
     this.isSlideBarOpen = false;
     this.isSlideChecked = true;
-    this.isSlideDisabled = false;
     this.isStart = true;
     this.isSlideVisible = true;
 
@@ -43,7 +42,6 @@ export class AppComponent implements OnInit, AfterContentChecked {
 
   isSlideBarOpen: boolean;
   isSlideChecked: boolean;
-  isSlideDisabled: boolean;
   isStart: boolean;
   isSlideVisible: boolean;
 
@@ -57,7 +55,6 @@ export class AppComponent implements OnInit, AfterContentChecked {
     if (window.innerWidth < 1500){
       this.isSlideVisible = false;
       this.isSlideChecked = false;
-      this.isSlideDisabled = true;
     }
   }
 
@@ -81,7 +78,6 @@ export class AppComponent implements OnInit, AfterContentChecked {
   onResize(){
     if(window.innerWidth < 1500){
       this.isSlideVisible = false;
-      this.isSlideDisabled = true;
       if(this.isSlideBarOpen){
         this.asideBar.className = 'conteiner open-aside-bar darken';
         this.header.className = 'darken';
@@ -92,7 +88,6 @@ export class AppComponent implements OnInit, AfterContentChecked {
 
     if(window.innerWidth >= 1500){
       this.isSlideVisible = true;
-      this.isSlideDisabled = false;
     }
   }
 
