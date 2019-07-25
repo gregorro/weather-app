@@ -1,4 +1,4 @@
-$thema-color: rgba(71, 129, 193, 0.8);
+$thema-color: rgba(71, 129, 193, 1);
 $text-color:white;
 
 header {
@@ -46,36 +46,20 @@ main {
 }
 
 section {
-  margin: 0 auto;
+  margin: 30px auto 0 auto;
   max-width: 1500px;
-  padding: 0 50px;
+  padding: 0 20px;
 }
 
 section:first-of-type {
-  padding-top: 80px;
+  margin-top: 50px;
+  padding-top: 10px;
 }
 
-section:nth-last-of-type(1) {
-  padding-top: 30px;
-}
+
 
 .jumbotron {
   opacity: 0.85;
   margin: 0 50px;
-}
-
-@media only screen and (max-width: 600px) {
-  section:first-of-type {
-    padding-top: 50px;
-  }
-  section{
-    padding: 0 20px;
-  }
-}
-
-@media only screen and (max-width: 400px) {
-  section{
-    padding: 0 10px;
-  }
 }
 

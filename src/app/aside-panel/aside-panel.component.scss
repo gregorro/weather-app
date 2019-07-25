@@ -6,7 +6,7 @@ div.conteiner {
   position: fixed;
   z-index: 1;
   height: 100%;
-  background-color: rgba(71, 129, 193, 0.8);
+  background-color: rgba(59, 128, 202, 1);
   margin-top: 50px;
   width: 400px;
   box-sizing: border-box;
@@ -20,13 +20,9 @@ div.conteiner {
   &>div {
     padding-top: 30px;
     width: 80%;
-    height: 85%;
-    overflow: scroll;
+    height: 75%;
+    overflow-x: auto;
     margin: 0 auto;
-    &::-webkit-scrollbar{
-      display: none;
-    }
-
     &>div:not(:last-of-type) {
       margin-bottom: 50px;
     }

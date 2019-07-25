@@ -6,6 +6,11 @@ export interface MatSlideEvent{
   checked: boolean;
 }
 
+export interface HTMLEvent{
+  value?: any;
+  stopPropagation(): void;
+}
+
 export interface IWeatherPackage {
   picture: string;
   mainDescription: string;

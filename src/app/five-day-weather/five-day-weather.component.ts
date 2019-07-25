@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ISelectOption } from './../../typings/typings.d';
 import {
   IForecast, IWeatherPackage,
@@ -16,7 +17,7 @@ import {
   styleUrls: ["./five-day-weather.component.scss"]
 })
 export class FiveDayWeatherComponent implements AfterViewChecked {
-  constructor(private http: CheckingWeatherService) {
+  constructor(private http: CheckingWeatherService, private snackBar: MatSnackBar) {
     this.isAvailableData = false;
     this.isHourWeather = false;
     this.daysWeather = [];
@@ -62,7 +63,7 @@ export class FiveDayWeatherComponent implements AfterViewChecked {
     }
   }
 
-  onNewWeatherIdEvent(id) {
+  onNewWeatherIdEvent(id: number) {
     if (id > 0) {
       this.http
         .getForecast5(id)
@@ -76,7 +77,9 @@ export class FiveDayWeatherComponent implements AfterViewChecked {
           this.isAvailableData ? null : (this.isAvailableData = true);
         })
         .catch(err => {
-          console.error(err);
+          this.snackBar.open('Error', 'Unexpected server error.',{
+            duration: 3000,
+          })
         });
     }
 

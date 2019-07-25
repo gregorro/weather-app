@@ -14,6 +14,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TooltipModule } from 'primeng/tooltip';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 // import { MenuItem } from 'primeng/api';
 
 import { AppComponent } from './app.component';
@@ -47,7 +48,8 @@ import { DynamicMapComponent } from './dynamic-map/dynamic-map.component';
     OverlayPanelModule,
     MatSelectModule,
     MatSlideToggleModule,
-    TooltipModule
+    TooltipModule,
+    MatSnackBarModule,
   ],
   entryComponents: [DynamicMapComponent],
   providers: [CheckingWeatherService],

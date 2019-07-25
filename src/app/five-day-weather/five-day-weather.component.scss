@@ -6,24 +6,32 @@
   display: inline-flex;
 }
 
-.weather {
-  margin: 0 auto;
-
-  &>div {
-    transform: 1s;
-
-    &>div {
-      transition: 1s;
-      transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-      margin-bottom: 10px;
-
-
-      &:hover {
-        cursor: pointer;
-      }
+.weather, .hour-view  {
+  &>div:nth-of-type(2){
+    overflow-Y: auto;
+    &>div{
+      height: 100%;
+      width: max-content;
     }
   }
 }
+
+.weather  .day-box {
+    display: inline-block;
+    transition: 1s;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    padding: 5px 15px;
+    max-width: 290px;
+    height: 100%;
+    min-width: 220px;
+    width: calc(100vw/5 - 10px);
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+
 
 th>img {
   margin-left: 5px;
@@ -39,17 +47,31 @@ th>img {
   }
 }
 
+.weather{
+  margin: 0 auto 30px auto;
+  &>div:nth-of-type(2){
+    height: 350px;
+  }
+}
+
 
 .hour-view {
   margin-top: 30px;
+  &>div:nth-of-type(2){
+    height: 250px;
+  }
+}
 
-  & div.p-col {
-    min-width: 135px;
-    margin-bottom: 10px;
 
-    &div:nth-last-of-type(1) {
-      display: inline-flex;
-    }
+.hour-view  .hour-box {
+    display: inline-block;
+    transition: 1s;
+    margin: 0 5px;
+    padding: 0 5px;
+    max-width: 172px;
+    height: 100%;
+    min-width: 160px;
+    width: calc(100vw/8 - 20px);
 
     p,
     tr,
@@ -63,182 +85,18 @@ th>img {
 
     img.weather-icon-hour {
       width: 70px;
+      height: 70px;
     }
 
     img.arrow-hour {
       width: 20px;
     }
   }
-}
 
-@media only screen and (max-width: 1200px) {
-  .hour-view div.p-col {
-    width: 25%;
-    flex-basis: auto;
-  }
-}
-
-@media only screen and (max-width: 1100px) {
-  .weather {
-    div.p-col {
-      width: 50%;
-      flex-basis: auto;
-
-      &>div {
-        display: inline-block;
-        &:nth-of-type(1) {
-          display: inline-flex;
-        }
-
-        &:nth-of-type(2) {
-          margin-left: 20px;
-        }
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 750px) {
-  .weather div.p-grid {
-    display: block;
-  }
-
-  .weather div.p-col {
-    width: 450px;
-    margin: 0 auto;
-
-    p:first-of-type {
+  @media only screen and (max-width: 450px) {
+    mat-form-field {
       display: block;
-    }
-
-    &>div {
-      display: inline-block;
-
-      &:nth-of-type(1) {
-        display: inline-flex;
-
-        * {
-          display: inline-block;
-        }
-      }
-
-      &:nth-of-type(2) {
-        margin: 20px 0 0 40px;
-        display: inline-block;
-      }
-
-      table {
-        margin: auto;
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 650px) {
-  .hour-view div.p-col {
-    max-width: 50%;
-    flex-basis: auto;
-    min-width: 150px;
-    text-align: center;
-
-    table {
-      margin: auto;
-    }
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .weather div.p-col {
-    width: 400px;
-
-    &>div {
-      &:nth-of-type(1) {
-        img {
-          width: 80px;
-        }
-
-        h1 {
-          font-size: 2rem;
-        }
-      }
-
-      &:nth-of-type(2) {
-        margin: 20px 0 0 20px;
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 430px) {
-  mat-form-field {
-    display: block;
-    margin-left: 0 !important;
-  }
-
-  .weather div.p-col {
-    width: 350px;
-
-    &>div {
-      &:nth-of-type(1) {
-        img {
-          width: 70px;
-        }
-
-        h1 {
-          font-size: 1.5rem;
-        }
-      }
-
-      &:nth-of-type(2) {
-        margin: 20px 0 0 20px;
-      }
+      margin-left: 2px!important;
     }
   }
 
-  .hour-view .p-grid {
-    display: block;
-  }
-
-  .hour-view div.p-col {
-    text-align: left;
-    max-width: max-content;
-    margin: auto;
-    margin-bottom: 5px;
-    width: 100%;
-
-    &>div:nth-of-type(1) {
-      display: inline-flex;
-    }
-
-    &>div:nth-of-type(2) {
-      display: inline-block;
-      margin: 0 auto 10px 20px;
-    }
-  }
-}
-
-@media only screen and (max-width: 370px) {
-  .weather div.p-col {
-    width: 300px;
-
-    &>div {
-      &:nth-of-type(1) {
-        img {
-          width: 60px;
-        }
-
-        h1 {
-          font-size: 1.5rem;
-        }
-      }
-
-      &:nth-of-type(2) {
-        margin: 10px 0 0 10px;
-      }
-
-      table * {
-        font-size: 0.8rem;
-      }
-    }
-  }
-}

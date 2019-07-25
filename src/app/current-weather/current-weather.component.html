@@ -56,8 +56,7 @@
       <div class="map-box ui-g-12 ui-sm-12 ui-md-8 ui-g">
         <h5 class="ui-g-6">City: <b>{{dayWeather.name}}</b></h5>
         <h5 class="ui-g-6">Country: <b>{{dayWeather.country}}</b></h5>
-        <p-gmap class="ui-g-12" #gmap *ngIf="isMapActive" [styleClass]="'ui-g-12'"
-          [style]="{'height':'100%', 'border': '1px black solid'}" [options]="options">
+        <p-gmap class="ui-g-12" #gmap *ngIf="isMapActive" [styleClass]='mapStyle' [options]="options">
         </p-gmap>
       </div>
     </div>

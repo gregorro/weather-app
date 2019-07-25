@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { IWeatherPackage } from './../../typings/typings.d';
 import { IWeather } from "../../typings/typings";
 import { CheckingWeatherService } from "./../services/checking-weather/checking-weather.service";
@@ -5,7 +6,8 @@ import {
   Component,
   ElementRef,
   ViewChild,
-  AfterViewChecked
+  AfterViewChecked,
+  HostListener
 } from "@angular/core";
 
 @Component({
@@ -14,13 +16,15 @@ import {
   styleUrls: ["./current-weather.component.scss"]
 })
 export class CurrentWeatherComponent implements AfterViewChecked {
-  constructor(private http: CheckingWeatherService) {
+  constructor(private http: CheckingWeatherService, private snackBar: MatSnackBar) {
     this.isAvailableData = false;
     this.isMapActive = false;
     this.isStart = true;
     this.isBlackText = false;
+    window.innerWidth <= 700 ? this.mapStyle = "ui-g-12 map-small-width" : this.mapStyle = "ui-g-12 map-big-width";
   }
 
+  mapStyle: string;
   isAvailableData: boolean;
   isMapActive: boolean;
   currentDate: string;
@@ -31,6 +35,11 @@ export class CurrentWeatherComponent implements AfterViewChecked {
 
 
   @ViewChild("arrow", { read: ElementRef }) arrow: ElementRef;
+
+  @HostListener("window:resize", ["$event"])
+  onResize() {
+    window.innerWidth <= 700 ? this.mapStyle = "ui-g-12 map-small-width" : this.mapStyle = "ui-g-12 map-big-width";
+  }
 
   ngAfterViewChecked() {
     const doc = document.getElementsByTagName('body')[0];
@@ -163,7 +172,9 @@ export class CurrentWeatherComponent implements AfterViewChecked {
           this.isAvailableData = true;
         })
         .catch(err => {
-          console.error(err);
+          this.snackBar.open('Error', 'Unexpected server error.',{
+            duration: 3000,
+          })
         });
     }
     if ((id === -1)) {

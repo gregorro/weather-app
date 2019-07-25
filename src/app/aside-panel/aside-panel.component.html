@@ -8,7 +8,7 @@
     </div>
     <div>
       <h4>Select city:</h4>
-      <p-listbox [(ngModel)]="selectedCity" [options]="citesList" styleClass="p-view" [disabled]="!isAnyCity" (onClick)=showWeather($event)>
+      <p-listbox [(ngModel)]="selectedCity" [options]="citesList" styleClass="p-view" [disabled]="!isAnyCity" (onClick)="showWeather($event)">
         <ng-template let-city let-i="index" pTemplate="item">
           <div>
             <span>{{city.label}}</span>
@@ -23,7 +23,7 @@
       <div class="info-box">
           <p *ngIf="infoSuccess" class="success" ><b>Key has been changed.</b></p>
           <p *ngIf="infoError" class="error"><b>Specified key is invalid.</b></p>
-          <button pButton type="button" label="Change" (click)="changeKey($event)"></button>
+          <button pButton type="button" label="Change" (click)="changeKey()"></button>
       </div>
     </div>
   </div>

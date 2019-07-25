@@ -1,3 +1,4 @@
+import { HTMLEvent } from './../../typings/typings.d';
 import { CheckingWeatherService } from "./../services/checking-weather/checking-weather.service";
 import { ICity } from "../../typings/typings";
 import {
@@ -7,6 +8,8 @@ import {
   AfterViewChecked
 } from "@angular/core";
 import { SelectItem } from "primeng/api";
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: "app-aside-panel",
@@ -14,7 +17,7 @@ import { SelectItem } from "primeng/api";
   styleUrls: ["./aside-panel.component.scss"]
 })
 export class AsidePanelComponent implements AfterViewChecked {
-  constructor(private http: CheckingWeatherService) {
+  constructor(private http: CheckingWeatherService, private snackBar: MatSnackBar) {
     this.isSlideBarOpen = false;
     this.isAnyCity = false;
     this.citesList.push(this.firstCityPlaceholder);
@@ -50,6 +53,10 @@ export class AsidePanelComponent implements AfterViewChecked {
       .toPromise()
       .then((data: ICity[]) => {
         this.filteredCities = data;
+      }).catch((err: HttpErrorResponse) =>{
+        this.snackBar.open('Error', 'Unexpected server error.',{
+          duration: 3000,
+        });
       });
   }
 
@@ -69,7 +76,7 @@ export class AsidePanelComponent implements AfterViewChecked {
         });
       }
 
-      if (focusCityArrayIndex >= 0 && this.filteredCities[focusCityArrayIndex].id != this.lastCityId) {
+      if (focusCityArrayIndex >= 0 && this.filteredCities[focusCityArrayIndex].id !== this.lastCityId && window.innerWidth >= 600) {
         this.showMapEvent.emit(this.filteredCities[focusCityArrayIndex]);
         this.lastCityId = this.filteredCities[focusCityArrayIndex].id;
       }
@@ -77,9 +84,11 @@ export class AsidePanelComponent implements AfterViewChecked {
   }
 
 
-  hideMap(){
-    this.startChangeDetection = false;
+  hideMap(): void{
+    if(window.innerWidth >= 600){
+      this.startChangeDetection = false;
     this.showMapEvent.emit(false);
+    }
   }
 
   addCitytoList(): void {
@@ -102,7 +111,7 @@ export class AsidePanelComponent implements AfterViewChecked {
     this.city = null;
   }
 
-  deleteCity(e, city: SelectItem) {
+  deleteCity(e: HTMLEvent, city: SelectItem) {
     e.stopPropagation();
     (<ICity>city.value).id == this.selectedCity.id
       ? this.newWeatherIdEvent.emit(-1)
@@ -118,12 +127,12 @@ export class AsidePanelComponent implements AfterViewChecked {
     }
   }
 
-  showWeather(event): void {
+  showWeather(event: HTMLEvent): void {
     const city: ICity = event.value;
     this.newWeatherIdEvent.emit(city.id);
   }
 
-  async changeKey(e): Promise<void> {
+  async changeKey(): Promise<void> {
     await this.http.changeKey(this.key).then((ans: boolean) => {
       if (ans) {
         this.infoSuccess = true;
@@ -136,6 +145,10 @@ export class AsidePanelComponent implements AfterViewChecked {
           this.infoError = false;
         }, 5000);
       }
+    }).catch(err => {
+      this.snackBar.open('Error', 'Unexpected server error.',{
+        duration: 3000,
+      })
     });
   }
 }

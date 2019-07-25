@@ -1,4 +1,4 @@
-import { MatSlideEvent } from './../typings/typings.d';
+import { MatSlideEvent } from "./../typings/typings.d";
 import { MapDirective } from "./map.directive";
 import { DynamicMapComponent } from "./dynamic-map/dynamic-map.component";
 import {
@@ -23,8 +23,6 @@ export class AppComponent implements OnInit, AfterContentChecked {
     this.isSlideChecked = true;
     this.isStart = true;
     this.isSlideVisible = true;
-
-
     this.data = {
       id: null,
       name: "",
@@ -39,78 +37,126 @@ export class AppComponent implements OnInit, AfterContentChecked {
   header: HTMLElement;
   asideBar: HTMLElement;
   data: ICity;
+  scrollBackgroundContainers: HTMLCollectionOf<Element>;
 
   isSlideBarOpen: boolean;
   isSlideChecked: boolean;
   isStart: boolean;
   isSlideVisible: boolean;
+  isEnoughBigView: boolean;
 
   @ViewChild("section", { read: ElementRef }) section: ElementRef;
   @ViewChild(MapDirective) gMap: MapDirective;
 
   ngOnInit() {
+    window.innerWidth >= 600
+    ? (this.isEnoughBigView = true)
+    : (this.isEnoughBigView = false);
     this.asideBar = document.getElementById("aside-bar");
     this.header = document.getElementsByTagName("header")[0];
 
-    if (window.innerWidth < 1500){
+    if (window.innerWidth < 1500) {
       this.isSlideVisible = false;
       this.isSlideChecked = false;
     }
   }
 
-  ngAfterContentChecked(){
-    const choiceBox: HTMLElement= document.querySelector(".ui-autocomplete-panel");
-    const overlayPanel: HTMLElement = document.querySelector(".ui-overlaypanel");
-    if (choiceBox && overlayPanel){
+  ngAfterContentChecked() {
+    this.scrollBackgroundContainers = document.getElementsByClassName(
+      "scroll-background"
+    );
+    this.scrollBackgroundContainers[0] && window.innerWidth < 1100
+      ? (this.scrollBackgroundContainers[0].className =
+          "scroll-background full-width")
+      : null;
+    this.scrollBackgroundContainers[0] && window.innerWidth >= 1100
+      ? (this.scrollBackgroundContainers[0].className = "scroll-background")
+      : null;
+    this.scrollBackgroundContainers[1] && window.innerWidth < 1350
+      ? (this.scrollBackgroundContainers[1].className =
+          "scroll-background full-width")
+      : null;
+    this.scrollBackgroundContainers[1] && window.innerWidth >= 1350
+      ? (this.scrollBackgroundContainers[1].className = "scroll-background")
+      : null;
+
+    const choiceBox: HTMLElement = document.querySelector(
+      ".ui-autocomplete-panel"
+    );
+    const overlayPanel: HTMLElement = document.querySelector(
+      ".ui-overlaypanel"
+    );
+
+    if (choiceBox && overlayPanel) {
       const positionOfChoiceBox: ClientRect = choiceBox.getBoundingClientRect();
-      if(window.innerWidth < 560){
-        overlayPanel.style.left = `5px`;
-        overlayPanel.style.top = `${positionOfChoiceBox.bottom + window.scrollY}px`;
-        overlayPanel.style.width = `${window.innerWidth - 10}px`;
-      }else{
         overlayPanel.style.left = `${positionOfChoiceBox.left}px`;
-        overlayPanel.style.top = `${positionOfChoiceBox.bottom + window.scrollY}px`;
-      }
+        overlayPanel.style.top = `${positionOfChoiceBox.bottom +
+          window.scrollY}px`;
+
     }
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(){
-    if(window.innerWidth < 1500){
+  @HostListener("window:resize", ["$event"])
+  onResize() {
+    window.innerWidth >= 600
+      ? (this.isEnoughBigView = true)
+      : (this.isEnoughBigView = false);
+    this.scrollBackgroundContainers[0] && window.innerWidth < 1100
+      ? (this.scrollBackgroundContainers[0].className =
+          "scroll-background full-width")
+      : null;
+    this.scrollBackgroundContainers[0] && window.innerWidth >= 1100
+      ? (this.scrollBackgroundContainers[0].className = "scroll-background")
+      : null;
+    this.scrollBackgroundContainers[1] && window.innerWidth < 1350
+      ? (this.scrollBackgroundContainers[1].className =
+          "scroll-background full-width")
+      : null;
+    this.scrollBackgroundContainers[1] && window.innerWidth >= 1350
+      ? (this.scrollBackgroundContainers[1].className = "scroll-background")
+      : null;
+
+    if (window.innerWidth < 1500) {
       this.isSlideVisible = false;
-      if(this.isSlideBarOpen){
-        this.asideBar.className = 'conteiner open-aside-bar darken';
-        this.header.className = 'darken';
-        this.section.nativeElement.style.paddingLeft = '0';
+      if (this.isSlideBarOpen) {
+        this.asideBar.className = "conteiner open-aside-bar darken";
+        this.header.className = "darken";
+        this.section.nativeElement.style.paddingLeft = "0";
         this.isSlideChecked = false;
       }
     }
 
-    if(window.innerWidth >= 1500){
+    if (window.innerWidth >= 1500) {
       this.isSlideVisible = true;
     }
   }
 
   toggleSection(canClose?: boolean) {
-      if (!this.isSlideBarOpen) {
-       if(this.isSlideChecked){
-        this.section.nativeElement.style.paddingLeft = '400px'
-        this.asideBar.className = 'conteiner open-aside-bar';
-       }else{
-        this.asideBar.className = 'conteiner open-aside-bar darken';
-        this.header.className = 'darken';
-       }
-       this.isSlideBarOpen = !this.isSlideBarOpen;
-      } else if(canClose !== false) {
-        this.asideBar.className = 'conteiner close-aside-bar';
-        this.header.className = '';
-        this.section.nativeElement.style.paddingLeft = '0'
-        this.isSlideBarOpen = !this.isSlideBarOpen;
+    if (!this.isSlideBarOpen) {
+      if (this.isSlideChecked) {
+        this.section.nativeElement.style.paddingLeft = "400px";
+        this.asideBar.className = "conteiner open-aside-bar";
+      } else {
+        this.asideBar.className = "conteiner open-aside-bar darken";
+        this.header.className = "darken";
       }
+      this.isSlideBarOpen = !this.isSlideBarOpen;
+    } else if (canClose !== false) {
+      this.asideBar.className = "conteiner close-aside-bar";
+      this.header.className = "";
+      this.section.nativeElement.style.paddingLeft = "0";
+      this.isSlideBarOpen = !this.isSlideBarOpen;
+    }
   }
 
-  onChangeSlide(event: MatSlideEvent){
+  onChangeSlide(event: MatSlideEvent) {
     this.isSlideChecked = event.checked;
+  }
+
+  checkViewSize(id: number) {
+    if (id !== -1 && window.innerWidth < 600) {
+      this.toggleSection();
+    }
   }
 
   setMap(event: ICity | boolean) {

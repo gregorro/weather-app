@@ -51,7 +51,7 @@ $rain-weather: rgba(136, 141, 137, 0.4);
 $snow-weather: rgba(247, 249, 253, 0.4);
 $atmosphere-weather: rgba(94, 107, 109, 0.4);
 $clear-weather: rgba(71, 129, 193, 0.4);
-$clouds-weather: rgba(161, 161, 164, 0.4);
+$clouds-weather: rgba(165, 172, 198, 0.4);
 $clouds2-weather: rgba(48, 47, 55, 0.4);
 
 $thunderstorm-background: url('./assets/1080p/thunderstorm-1080p.jpg');
@@ -70,6 +70,15 @@ body.thunderstorm-weather {
     filter: blur(3px);
   }
 
+  .full-width{
+    position: relative;
+    left: -20px;
+    width: 100vw;
+    &>div{
+      background-color: rgba(lighten($thunderstorm-weather, 10%), 0.3);
+    }
+  }
+
   header {
     background-color: $thunderstorm-weather;
   }
@@ -79,14 +88,14 @@ body.thunderstorm-weather {
   }
 
   header.darken {
-    background-color: rgba(darken($thunderstorm-weather, 10%), 0.8);
+    background-color: rgba(darken($thunderstorm-weather, 10%), 1);
   }
 
   #aside-bar.darken {
-    background-color: rgba(darken($thunderstorm-weather, 10%), 0.8);
+    background-color: rgba(darken($thunderstorm-weather, 10%), 1);
   }
 
-  .weather > div > div:hover{
+  .weather > div > div > div:hover{
     background-color: $thunderstorm-weather;
   }
 }
@@ -98,6 +107,16 @@ body.drizzle-weather {
   .hamburger.is-active .hamburger-inner, .hamburger.is-active .hamburger-inner::before, .hamburger.is-active .hamburger-inner::after, .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
     background-color: black;
   }
+
+  .full-width{
+    position: relative;
+    left: -20px;
+    width: 100vw;
+    &>div{
+      background-color: rgba(lighten($drizzle-weather, 10%), 0.3);
+    }
+  }
+
 
   &::before {
     background: $drizzle-background no-repeat center center;
@@ -115,14 +134,14 @@ body.drizzle-weather {
   }
 
   header.darken {
-    background-color: rgba(darken($drizzle-weather, 10%), 0.8);
+    background-color: rgba(darken($drizzle-weather, 10%), 1);
   }
 
   #aside-bar.darken {
-    background-color: rgba(darken($drizzle-weather, 10%), 0.8);
+    background-color: rgba(darken($drizzle-weather, 10%), 1);
   }
 
-  .weather > div > div:hover{
+  .weather > div > div > div:hover{
     background-color: $drizzle-weather;
   }
 }
@@ -134,6 +153,15 @@ body.rain-weather {
     background-blend-mode: color-burn;
   }
 
+  .full-width{
+    position: relative;
+    left: -20px;
+    width: 100vw;
+    &>div{
+      background-color: rgba(lighten($rain-weather, 10%), 0.3);
+    }
+  }
+
   header {
     background-color: $rain-weather;
   }
@@ -143,14 +171,14 @@ body.rain-weather {
   }
 
   header.darken {
-    background-color: rgba(darken($rain-weather, 10%), 0.8);
+    background-color: rgba(darken($rain-weather, 10%), 1);
   }
 
   #aside-bar.darken {
-    background-color: rgba(darken($rain-weather, 10%), 0.8);
+    background-color: rgba(darken($rain-weather, 10%), 1);
   }
 
-  .weather > div > div:hover{
+  .weather > div > div > div:hover{
     background-color: $rain-weather;
   }
 }
@@ -169,6 +197,15 @@ body.snow-weather {
     filter: blur(3px);
   }
 
+  .full-width{
+    position: relative;
+    left: -20px;
+    width: 100vw;
+    &>div{
+      background-color: rgba(lighten($snow-weather, 10%), 0.3);
+    }
+  }
+
   header {
     background-color: $snow-weather;
   }
@@ -178,14 +215,14 @@ body.snow-weather {
   }
 
   header.darken {
-    background-color: rgba(darken($snow-weather, 10%), 0.8);
+    background-color: rgba(darken($snow-weather, 10%), 1);
   }
 
   #aside-bar.darken {
-    background-color: rgba(darken($snow-weather, 10%), 0.8);
+    background-color: rgba(darken($snow-weather, 10%), 1);
   }
 
-  .weather > div > div:hover{
+  .weather > div > div > div:hover{
     background-color: $snow-weather;
   }
 }
@@ -196,6 +233,15 @@ body.atmosphere-weather {
     background-size: cover;
   }
 
+  .full-width{
+    position: relative;
+    left: -20px;
+    width: 100vw;
+    &>div{
+      background-color: rgba(lighten($atmosphere-weather, 10%), 0.3);
+    }
+  }
+
   header {
     background-color: $atmosphere-weather;
   }
@@ -205,14 +251,14 @@ body.atmosphere-weather {
   }
 
   header.darken {
-    background-color: rgba(darken($atmosphere-weather, 10%), 0.8);
+    background-color: rgba(darken($atmosphere-weather, 10%), 1);
   }
 
   #aside-bar.darken {
-    background-color: rgba(darken($atmosphere-weather, 10%), 0.8);
+    background-color: rgba(darken($atmosphere-weather, 10%), 1);
   }
 
-  .weather > div > div:hover{
+  .weather > div  > div > div:hover{
     background-color: $atmosphere-weather;
   }
 }
@@ -225,6 +271,15 @@ body.clear-weather {
     background-blend-mode: hue;
   }
 
+  .full-width{
+    position: relative;
+    left: -20px;
+    width: 100vw;
+    &>div{
+      background-color: rgba(lighten($clear-weather, 10%), 0.3);
+    }
+  }
+
   header {
     background-color: $clear-weather;
   }
@@ -234,14 +289,14 @@ body.clear-weather {
   }
 
   header.darken {
-    background-color: rgba(darken($clear-weather, 10%), 0.8);
+    background-color: rgba(darken($clear-weather, 10%), 1);
   }
 
   #aside-bar.darken {
-    background-color:  rgba(darken($clear-weather, 10%), 0.8);
+    background-color:  rgba(darken($clear-weather, 10%), 1);
   }
 
-  .weather > div > div:hover{
+  .weather > div > div > div:hover{
     background-color: $clear-weather;
   }
 }
@@ -251,7 +306,15 @@ body.clouds-weather {
     background: rgba(108, 108, 146, 0.4) $clouds-background no-repeat center center;
     background-size: cover;
     background-blend-mode: darken;
-    filter: blur(2px);
+  }
+
+  .full-width{
+    position: relative;
+    left: -20px;
+    width: 100vw;
+    &>div{
+      background-color: rgba(lighten($clouds-weather, 10%), 0.3);
+    }
   }
 
   header {
@@ -263,14 +326,14 @@ body.clouds-weather {
   }
 
   header.darken {
-    background-color: rgba(darken($clouds-weather, 10%), 0.8);
+    background-color: rgba(darken($clouds-weather, 10%), 1);
   }
 
   #aside-bar.darken {
-    background-color: rgba(darken($clouds-weather, 10%), 0.8);
+    background-color: rgba(darken($clouds-weather, 10%), 1);
   }
 
-  .weather > div > div:hover{
+  .weather > div > div >  div:hover{
     background-color: $clouds-weather;
   }
 }
@@ -283,6 +346,15 @@ body.clouds2-weather {
     background-blend-mode: hue;
   }
 
+  .full-width{
+    position: relative;
+    left: -20px;
+    width: 100vw;
+    &>div{
+      background-color: rgba(lighten($clouds2-weather, 10%), 0.3);
+    }
+  }
+
   header {
     background-color: $clouds2-weather;
   }
@@ -292,14 +364,14 @@ body.clouds2-weather {
   }
 
   header.darken {
-    background-color: rgba(darken($clouds2-weather, 10%), 0.8);
+    background-color: rgba(darken($clouds2-weather, 10%), 1);
   }
 
   #aside-bar.darken {
-    background-color: rgba(darken($clouds2-weather, 10%), 0.8);
+    background-color: rgba(darken($clouds2-weather, 10%), 1);
   }
 
-  .weather > div > div:hover{
+  .weather > div > div > div:hover{
     background-color: $clouds2-weather;
   }
 }
@@ -386,6 +458,16 @@ body .ui-button.ui-button-icon-only {
     bottom: 0;
     position: absolute;
   }
+}
+
+.map-big-width{
+  height: 100%;
+  border: 1px black solid;
+}
+
+.map-small-width{
+  height: 200px;
+  width: 100vw;
 }
 
 div#aside-bar.open-aside-bar{

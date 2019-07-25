@@ -29,24 +29,23 @@ p-gmap{
   height: 80%;
 }
 
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 700px) {
   p-gmap{
-    height: 200px;
+    width: 100%;
+    left: -29px;
+    position: relative;
+    padding: 0;
   }
-  .table-div{
-    margin-top: auto;
-    margin-bottom: 20px;
-    margin-left: 30px;
-  }
-  .weather-details > div{
-    margin: 0 auto;
-    &:nth-of-type(2){
-      margin: auto auto 20px 30px;
+
+  .weather-details{
+    display: block;
+    width: 100%;
+    &>div{
+      width: 50%;
+      display: inline-block;
     }
   }
   .map-box{
-    padding: 0;
+    width: 100%;
   }
 }
-
-
