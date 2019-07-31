@@ -12,8 +12,8 @@
             <tr *ngIf="hour.wind">
               <td>Wind</td>
               <th [ngSwitch]="isBlackText">{{hour.wind.speed}} km/h
-                <img *ngSwitchCase="true" id="arrow-{{i+5}}" class="arrow-hour" src="../../assets/left-arrow.png">
-                <img *ngSwitchDefault id="arrow-{{i+5}}" class="arrow-hour" src="../../assets/left-arrow-white.png">
+                <img *ngSwitchCase="true" id="arrow-{{i}}" class="arrow-hour" src="../../assets/left-arrow.png">
+                <img *ngSwitchDefault id="arrow-{{i}}" class="arrow-hour" src="../../assets/left-arrow-white.png">
               </th>
             </tr>
             <tr>
