@@ -1,8 +1,8 @@
 import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[app-map]',
+  selector: '[app-dynamic]',
 })
-export class MapDirective {
+export class DynamicComponentDirective {
   constructor(public viewContainerRef: ViewContainerRef) { }
 }

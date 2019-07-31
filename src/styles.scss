@@ -1,14 +1,40 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-body{
-  .hamburger.is-active .hamburger-inner, .hamburger.is-active .hamburger-inner::before, .hamburger.is-active .hamburger-inner::after, .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+*, .ui-button-icon-right {
+  color: white;
+}
+
+.jumbotron *:not(a),
+.ui-autocomplete-panel *,
+.ui-listbox-list *:not(.ui-button-icon-right),
+.mat-option.mat-active,
+.error, .success, .mat-option-text {
+  color: initial;
+}
+
+.city-namie-box {
+
+  p,
+  b {
+    color: black;
+  }
+}
+
+body {
+
+  .hamburger.is-active .hamburger-inner,
+  .hamburger.is-active .hamburger-inner::before,
+  .hamburger.is-active .hamburger-inner::after,
+  .hamburger-inner,
+  .hamburger-inner::before,
+  .hamburger-inner::after {
     background-color: white;
   }
 }
 
-p.open-weather-link a{
-    color: orange;
-  }
+p.open-weather-link a {
+  color: orange;
+}
 
 body::before {
   content: "";
@@ -21,7 +47,7 @@ body::before {
   width: 100%;
   height: 100%;
   z-index: -10;
-  background: url('./assets/1080p/sun-1080p.jpg')  no-repeat center center;
+  background: url('./assets/1080p/sun-1080p.jpg') no-repeat center center;
   background-blend-mode: none;
   background-color: none;
   -webkit-background-size: cover;
@@ -30,11 +56,12 @@ body::before {
   background-size: cover;
 }
 
-span.mat-select-value-text, .mat-select-arrow{
+span.mat-select-value-text,
+.mat-select-arrow {
   color: white;
 }
 
-.mat-slide-toggle-content{
+.mat-slide-toggle-content {
   color: white;
 }
 
@@ -55,13 +82,13 @@ $clouds-weather: rgba(165, 172, 198, 0.4);
 $clouds2-weather: rgba(48, 47, 55, 0.4);
 
 $thunderstorm-background: url('./assets/1080p/thunderstorm-1080p.jpg');
-  $drizzle-background: url('./assets/1080p/drizzle-1080p.jpg');
-  $rain-background: url('./assets/1080p/rain-1080p.jpg');
-  $snow-background: url('./assets/1080p/snow-1080p.jpg');
-  $atmosphere-background: url('./assets/1080p/atmosphere-1080p.jpg');
-  $clear-background: url('./assets/1080p/clear-1080p.jpg');
-  $clouds-background: url('./assets/1080p/clouds-1080p.jpg');
-  $clouds2-background: url('./assets/1080p/clouds2-1080p.jpg');
+$drizzle-background: url('./assets/1080p/drizzle-1080p.jpg');
+$rain-background: url('./assets/1080p/rain-1080p.jpg');
+$snow-background: url('./assets/1080p/snow-1080p.jpg');
+$atmosphere-background: url('./assets/1080p/atmosphere-1080p.jpg');
+$clear-background: url('./assets/1080p/clear-1080p.jpg');
+$clouds-background: url('./assets/1080p/clouds-1080p.jpg');
+$clouds2-background: url('./assets/1080p/clouds2-1080p.jpg');
 
 body.thunderstorm-weather {
   &::before {
@@ -70,11 +97,12 @@ body.thunderstorm-weather {
     filter: blur(3px);
   }
 
-  .full-width{
+  .full-width {
     position: relative;
     left: -20px;
     width: 100vw;
-    &>div{
+
+    &>div {
       background-color: rgba(lighten($thunderstorm-weather, 10%), 0.3);
     }
   }
@@ -95,24 +123,31 @@ body.thunderstorm-weather {
     background-color: rgba(darken($thunderstorm-weather, 10%), 1);
   }
 
-  .weather > div > div > div:hover{
-    background-color: $thunderstorm-weather;
+  .weather .day-box:hover {
+    background-color: rgba($thunderstorm-weather, 0.6);
   }
 }
 
 body.drizzle-weather {
-  *{
-    color: black!important;
+  *:not(.open-weather-link) {
+    color: black !important;
   }
-  .hamburger.is-active .hamburger-inner, .hamburger.is-active .hamburger-inner::before, .hamburger.is-active .hamburger-inner::after, .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+
+  .hamburger.is-active .hamburger-inner,
+  .hamburger.is-active .hamburger-inner::before,
+  .hamburger.is-active .hamburger-inner::after,
+  .hamburger-inner,
+  .hamburger-inner::before,
+  .hamburger-inner::after {
     background-color: black;
   }
 
-  .full-width{
+  .full-width {
     position: relative;
     left: -20px;
     width: 100vw;
-    &>div{
+
+    &>div {
       background-color: rgba(lighten($drizzle-weather, 10%), 0.3);
     }
   }
@@ -121,7 +156,7 @@ body.drizzle-weather {
   &::before {
     background: $drizzle-background no-repeat center center;
     background-size: cover;
-    background-color: rgba(255,255,255,0.4);
+    background-color: rgba(255, 255, 255, 0.4);
     background-blend-mode: lighten;
   }
 
@@ -141,8 +176,8 @@ body.drizzle-weather {
     background-color: rgba(darken($drizzle-weather, 10%), 1);
   }
 
-  .weather > div > div > div:hover{
-    background-color: $drizzle-weather;
+  .weather .day-box:hover {
+    background-color: rgba($drizzle-weather, 0.6);
   }
 }
 
@@ -153,11 +188,12 @@ body.rain-weather {
     background-blend-mode: color-burn;
   }
 
-  .full-width{
+  .full-width {
     position: relative;
     left: -20px;
     width: 100vw;
-    &>div{
+
+    &>div {
       background-color: rgba(lighten($rain-weather, 10%), 0.3);
     }
   }
@@ -178,16 +214,22 @@ body.rain-weather {
     background-color: rgba(darken($rain-weather, 10%), 1);
   }
 
-  .weather > div > div > div:hover{
-    background-color: $rain-weather;
+  .weather .day-box:hover {
+    background-color: rgba($rain-weather, 0.6);
   }
 }
 
 body.snow-weather {
-  * {
-    color: black!important;
+  *:not(.open-weather-link) {
+    color: black !important;
   }
-  .hamburger.is-active .hamburger-inner, .hamburger.is-active .hamburger-inner::before, .hamburger.is-active .hamburger-inner::after, .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+
+  .hamburger.is-active .hamburger-inner,
+  .hamburger.is-active .hamburger-inner::before,
+  .hamburger.is-active .hamburger-inner::after,
+  .hamburger-inner,
+  .hamburger-inner::before,
+  .hamburger-inner::after {
     background-color: black;
   }
 
@@ -197,11 +239,12 @@ body.snow-weather {
     filter: blur(3px);
   }
 
-  .full-width{
+  .full-width {
     position: relative;
     left: -20px;
     width: 100vw;
-    &>div{
+
+    &>div {
       background-color: rgba(lighten($snow-weather, 10%), 0.3);
     }
   }
@@ -222,8 +265,8 @@ body.snow-weather {
     background-color: rgba(darken($snow-weather, 10%), 1);
   }
 
-  .weather > div > div > div:hover{
-    background-color: $snow-weather;
+  .weather .day-box:hover {
+    background-color: rgba($snow-weather, 0.6);
   }
 }
 
@@ -233,11 +276,12 @@ body.atmosphere-weather {
     background-size: cover;
   }
 
-  .full-width{
+  .full-width {
     position: relative;
     left: -20px;
     width: 100vw;
-    &>div{
+
+    &>div {
       background-color: rgba(lighten($atmosphere-weather, 10%), 0.3);
     }
   }
@@ -258,8 +302,8 @@ body.atmosphere-weather {
     background-color: rgba(darken($atmosphere-weather, 10%), 1);
   }
 
-  .weather > div  > div > div:hover{
-    background-color: $atmosphere-weather;
+  .weather>div>div>div:hover {
+    background-color: rgba($atmosphere-weather, 0.6);
   }
 }
 
@@ -267,15 +311,16 @@ body.clear-weather {
   &::before {
     background: $clear-background no-repeat center center;
     background-size: cover;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     background-blend-mode: hue;
   }
 
-  .full-width{
+  .full-width {
     position: relative;
     left: -20px;
     width: 100vw;
-    &>div{
+
+    &>div {
       background-color: rgba(lighten($clear-weather, 10%), 0.3);
     }
   }
@@ -293,11 +338,11 @@ body.clear-weather {
   }
 
   #aside-bar.darken {
-    background-color:  rgba(darken($clear-weather, 10%), 1);
+    background-color: rgba(darken($clear-weather, 10%), 1);
   }
 
-  .weather > div > div > div:hover{
-    background-color: $clear-weather;
+  .weather .day-box:hover {
+    background-color: rgba($clear-weather, 0.6);
   }
 }
 
@@ -308,11 +353,12 @@ body.clouds-weather {
     background-blend-mode: darken;
   }
 
-  .full-width{
+  .full-width {
     position: relative;
     left: -20px;
     width: 100vw;
-    &>div{
+
+    &>div {
       background-color: rgba(lighten($clouds-weather, 10%), 0.3);
     }
   }
@@ -333,8 +379,8 @@ body.clouds-weather {
     background-color: rgba(darken($clouds-weather, 10%), 1);
   }
 
-  .weather > div > div >  div:hover{
-    background-color: $clouds-weather;
+  .weather>div>div>div:hover {
+    background-color: rgba($clouds-weather, 0.6);
   }
 }
 
@@ -342,15 +388,16 @@ body.clouds2-weather {
   &::before {
     background: $clouds2-background no-repeat center center;
     background-size: cover;
-    background-color: rgba(0,0,0, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     background-blend-mode: hue;
   }
 
-  .full-width{
+  .full-width {
     position: relative;
     left: -20px;
     width: 100vw;
-    &>div{
+
+    &>div {
       background-color: rgba(lighten($clouds2-weather, 10%), 0.3);
     }
   }
@@ -371,64 +418,179 @@ body.clouds2-weather {
     background-color: rgba(darken($clouds2-weather, 10%), 1);
   }
 
-  .weather > div > div > div:hover{
-    background-color: $clouds2-weather;
+  .weather .day-box:hover {
+    background-color: rgba($clouds2-weather, 0.6);
   }
 }
 
 @media only screen and (orientation: portrait) and (max-width: 480px) {
-  body.thunderstorm-weather::before{background-image: url('./assets/480p-l/thunderstorm-480p-l.jpg');}
-  body.drizzle-weather::before{background-image: url('./assets/480p-l/drizzle-480p-l.jpg');}
-  body.rain-weather::before{background-image: url('./assets/480p-l/rain-480p-l.jpg');}
-  body.snow-weather::before{background-image: url('./assets/480p-l/snow-480p-l.jpg');}
-  body.atmosphere-weather::before{background-image: url('./assets/480p-l/atmosphere-480p-l.jpg');}
-  body.clear-weather::before{background-image: url('./assets/480p-l/clear-480p-l.jpg');}
-  body.clouds-weather::before{background-image: url('./assets/480p-l/clouds-480p-l.jpg');}
-  body.clouds2-weather::before{background-image: url('./assets/480p-l/clouds2-480p-l.jpg');}
+  body.thunderstorm-weather::before {
+    background-image: url('./assets/480p-l/thunderstorm-480p-l.jpg');
+  }
+
+  body.drizzle-weather::before {
+    background-image: url('./assets/480p-l/drizzle-480p-l.jpg');
+  }
+
+  body.rain-weather::before {
+    background-image: url('./assets/480p-l/rain-480p-l.jpg');
+  }
+
+  body.snow-weather::before {
+    background-image: url('./assets/480p-l/snow-480p-l.jpg');
+  }
+
+  body.atmosphere-weather::before {
+    background-image: url('./assets/480p-l/atmosphere-480p-l.jpg');
+  }
+
+  body.clear-weather::before {
+    background-image: url('./assets/480p-l/clear-480p-l.jpg');
+  }
+
+  body.clouds-weather::before {
+    background-image: url('./assets/480p-l/clouds-480p-l.jpg');
+  }
+
+  body.clouds2-weather::before {
+    background-image: url('./assets/480p-l/clouds2-480p-l.jpg');
+  }
 }
 
 @media only screen and (orientation: portrait) and (min-width: 480px) {
-  body.thunderstorm-weather::before{background-image: url('./assets/720p-l/thunderstorm-720p-l.jpg');}
-  body.drizzle-weather::before{background-image: url('./assets/720p-l/drizzle-720p-l.jpg');}
-  body.rain-weather::before{background-image: url('./assets/720p-l/rain-720p-l.jpg');}
-  body.snow-weather::before{background-image: url('./assets/720p-l/snow-720p-l.jpg');}
-  body.atmosphere-weather::before{background-image: url('./assets/720p-l/atmosphere-720p-l.jpg');}
-  body.clear-weather::before{background-image: url('./assets/720p-l/clear-720p-l.jpg');}
-  body.clouds-weather::before{background-image: url('./assets/720p-l/clouds-720p-l.jpg');}
-  body.clouds2-weather::before{background-image: url('./assets/720p-l/clouds2-720p-l.jpg');}
+  body.thunderstorm-weather::before {
+    background-image: url('./assets/720p-l/thunderstorm-720p-l.jpg');
+  }
+
+  body.drizzle-weather::before {
+    background-image: url('./assets/720p-l/drizzle-720p-l.jpg');
+  }
+
+  body.rain-weather::before {
+    background-image: url('./assets/720p-l/rain-720p-l.jpg');
+  }
+
+  body.snow-weather::before {
+    background-image: url('./assets/720p-l/snow-720p-l.jpg');
+  }
+
+  body.atmosphere-weather::before {
+    background-image: url('./assets/720p-l/atmosphere-720p-l.jpg');
+  }
+
+  body.clear-weather::before {
+    background-image: url('./assets/720p-l/clear-720p-l.jpg');
+  }
+
+  body.clouds-weather::before {
+    background-image: url('./assets/720p-l/clouds-720p-l.jpg');
+  }
+
+  body.clouds2-weather::before {
+    background-image: url('./assets/720p-l/clouds2-720p-l.jpg');
+  }
 }
 
 @media only screen and (orientation: landscape) and (max-width: 1280px) {
-  body.thunderstorm-weather::before{background-image: url('./assets/720p/thunderstorm-720p.jpg');}
-  body.drizzle-weather::before{background-image: url('./assets/720p/drizzle-720p.jpg');}
-  body.rain-weather::before{background-image: url('./assets/720p/rain-720p.jpg');}
-  body.snow-weather::before{background-image: url('./assets/720p/snow-720p.jpg');}
-  body.atmosphere-weather::before{background-image: url('./assets/720p/atmosphere-720p.jpg');}
-  body.clear-weather::before{background-image: url('./assets/720p/clear-720p.jpg');}
-  body.clouds-weather::before{background-image: url('./assets/720p/clouds-720p.jpg');}
-  body.clouds2-weather::before{background-image: url('./assets/720p/clouds2-720p.jpg');}
+  body.thunderstorm-weather::before {
+    background-image: url('./assets/720p/thunderstorm-720p.jpg');
+  }
+
+  body.drizzle-weather::before {
+    background-image: url('./assets/720p/drizzle-720p.jpg');
+  }
+
+  body.rain-weather::before {
+    background-image: url('./assets/720p/rain-720p.jpg');
+  }
+
+  body.snow-weather::before {
+    background-image: url('./assets/720p/snow-720p.jpg');
+  }
+
+  body.atmosphere-weather::before {
+    background-image: url('./assets/720p/atmosphere-720p.jpg');
+  }
+
+  body.clear-weather::before {
+    background-image: url('./assets/720p/clear-720p.jpg');
+  }
+
+  body.clouds-weather::before {
+    background-image: url('./assets/720p/clouds-720p.jpg');
+  }
+
+  body.clouds2-weather::before {
+    background-image: url('./assets/720p/clouds2-720p.jpg');
+  }
 }
 
 @media only screen and (orientation: landscape) and (max-width: 1920px) {
-  body.thunderstorm-weather::before{background-image: url('./assets/1080p/thunderstorm-1080p.jpg');}
-  body.drizzle-weather::before{background-image: url('./assets/1080p/drizzle-1080p.jpg');}
-  body.rain-weather::before{background-image: url('./assets/1080p/rain-1080p.jpg');}
-  body.snow-weather::before{background-image: url('./assets/1080p/snow-1080p.jpg');}
-  body.atmosphere-weather::before{background-image: url('./assets/1080p/atmosphere-1080p.jpg');}
-  body.clear-weather::before{background-image: url('./assets/1080p/clear-1080p.jpg');}
-  body.clouds-weather::before{background-image: url('./assets/1080p/clouds-1080p.jpg');}
-  body.clouds2-weather::before{background-image: url('./assets/1080p/clouds2-1080p.jpg');}
+  body.thunderstorm-weather::before {
+    background-image: url('./assets/1080p/thunderstorm-1080p.jpg');
+  }
+
+  body.drizzle-weather::before {
+    background-image: url('./assets/1080p/drizzle-1080p.jpg');
+  }
+
+  body.rain-weather::before {
+    background-image: url('./assets/1080p/rain-1080p.jpg');
+  }
+
+  body.snow-weather::before {
+    background-image: url('./assets/1080p/snow-1080p.jpg');
+  }
+
+  body.atmosphere-weather::before {
+    background-image: url('./assets/1080p/atmosphere-1080p.jpg');
+  }
+
+  body.clear-weather::before {
+    background-image: url('./assets/1080p/clear-1080p.jpg');
+  }
+
+  body.clouds-weather::before {
+    background-image: url('./assets/1080p/clouds-1080p.jpg');
+  }
+
+  body.clouds2-weather::before {
+    background-image: url('./assets/1080p/clouds2-1080p.jpg');
+  }
 }
 
 @media only screen and (orientation: landscape) and (min-width: 1920px) {
-  body.thunderstorm-weather::before{background-image: url('./assets/4K/thunderstorm-4K.jpg');}
-  body.drizzle-weather::before{background-image: url('./assets/4K/drizzle-4K.jpg');}
-  body.rain-weather::before{background-image: url('./assets/4K/rain-4K.jpg');}
-  body.snow-weather::before{background-image: url('./assets/4K/snow-4K.jpg');}
-  body.atmosphere-weather::before{background-image: url('./assets/4K/atmosphere-4K.jpg');}
-  body.clear-weather::before{background-image: url('./assets/4K/clear-4K.jpg');}
-  body.clouds-weather::before{background-image: url('./assets/4K/clouds-4K.jpg');}
-  body.clouds2-weather::before{background-image: url('./assets/4K/clouds2-4K.jpg');}
+  body.thunderstorm-weather::before {
+    background-image: url('./assets/4K/thunderstorm-4K.jpg');
+  }
+
+  body.drizzle-weather::before {
+    background-image: url('./assets/4K/drizzle-4K.jpg');
+  }
+
+  body.rain-weather::before {
+    background-image: url('./assets/4K/rain-4K.jpg');
+  }
+
+  body.snow-weather::before {
+    background-image: url('./assets/4K/snow-4K.jpg');
+  }
+
+  body.atmosphere-weather::before {
+    background-image: url('./assets/4K/atmosphere-4K.jpg');
+  }
+
+  body.clear-weather::before {
+    background-image: url('./assets/4K/clear-4K.jpg');
+  }
+
+  body.clouds-weather::before {
+    background-image: url('./assets/4K/clouds-4K.jpg');
+  }
+
+  body.clouds2-weather::before {
+    background-image: url('./assets/4K/clouds2-4K.jpg');
+  }
 }
 
 /////////////////////////////////
@@ -460,23 +622,23 @@ body .ui-button.ui-button-icon-only {
   }
 }
 
-.map-big-width{
+.map-big-width {
   height: 100%;
   border: 1px black solid;
 }
 
-.map-small-width{
+.map-small-width {
   height: 200px;
   width: 100vw;
 }
 
-div#aside-bar.open-aside-bar{
+div#aside-bar.open-aside-bar {
   transform: translateX(0);
   opacity: 1;
   visibility: visible;
 }
 
-div#aside-bar.close-aside-bar{
+div#aside-bar.close-aside-bar {
   transform: translateX(-400px);
   opacity: 0;
   visibility: hidden;

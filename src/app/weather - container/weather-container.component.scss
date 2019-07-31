@@ -1,0 +1,27 @@
+.weather {
+  margin: 0 auto 30px auto;
+
+  &>div:nth-of-type(2) {
+    height: 350px;
+  }
+}
+
+.forecast-header{
+  mat-form-field, h1{
+    display: inline-block;
+  }
+  mat-form-field{
+    margin-left: 50px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  h1{
+    display: block!important;
+  }
+  mat-form-field {
+    display: block!important;
+    margin-left: 2px !important;
+    margin-top: 5px;
+  }
+}

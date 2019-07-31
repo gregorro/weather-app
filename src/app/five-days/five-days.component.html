@@ -1,0 +1,51 @@
+<div class="scroll-background day-component">
+  <div>
+    <div class="day-box" *ngFor="let day of daysWeather; index as i"
+      pTooltip="Click to show hourly weather" tooltipPosition="bottom"
+      (click)="showHourlyWeather(day)">
+      <p><b>{{day.date}}</b></p>
+      <p>{{day.mainDescription}}</p>
+      <div class="ico-temp">
+        <img class="weather-icon-day" src={{day.picture}}>
+        <h1>{{day.temp}}°C</h1>
+      </div>
+      <div>
+        <table>
+          <tr *ngIf="day.wind">
+            <td>Wind</td>
+            <th [ngSwitch]="isBlackText">{{day.wind.speed}} km/h
+              <img *ngSwitchCase="true" id="arrow-{{i}}" class="arrow-day" src="../../assets/left-arrow.png">
+              <img *ngSwitchDefault id="arrow-{{i}}" class="arrow-day" src="../../assets/left-arrow-white.png">
+            </th>
+          </tr>
+          <tr>
+            <td>Pressure</td>
+            <th>{{day.pressure}} hPa</th>
+          </tr>
+          <tr>
+            <td>Humidity</td>
+            <th>{{day.humidity}}%</th>
+          </tr>
+          <tr *ngIf="day.clouds">
+            <td>Clouds</td>
+            <th>{{day.clouds.all}}%</th>
+          </tr>
+          <tr *ngIf="day.rain">
+            <td>Rain</td>
+            <th>
+              {{day.rain['1h'] ? day.rain['1h']:  day.rain['3h'] }}
+              mm/cm3
+            </th>
+          </tr>
+          <tr *ngIf="day.snow">
+            <td>Snow</td>
+            <th>
+              {{day.snow['1h'] ? day.snow['1h'] : day.snow['3h'] }}
+              mm/cm3
+            </th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

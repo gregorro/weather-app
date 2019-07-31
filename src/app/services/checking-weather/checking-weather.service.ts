@@ -1,7 +1,7 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ISelectOption } from './../../../typings/typings.d';
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import * as appKeyJson from "./app-key.json";
 import { Observable } from "rxjs";
 import { IWeather } from '../../../typings/typings.js';
 
@@ -9,8 +9,8 @@ import { IWeather } from '../../../typings/typings.js';
   providedIn: "root"
 })
 export class CheckingWeatherService {
-  constructor(private http: HttpClient) {
-    this._key = appKeyJson.key;
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {
+    this.getKey();
   }
 
   private _key: string;
@@ -22,28 +22,35 @@ export class CheckingWeatherService {
   set key(value: string) {
     this._key = value;
 
-    // update app key
-
-    /* this.http
-      .post("http://localhost:3001/key", {
+     /*this.http
+      .post("https://secret-castle-75808.herokuapp.com/key", {
         params: {
           key: value
         }
       })
       .toPromise()
       .then(ans => {
-        console.log("success");
+        this.snackBar.open("Success", "The key has been saved.", {
+          duration: 3000
+        });
       })
       .catch(err => {
-        console.log("false");
+        console.log(err);
+        this.snackBar.open("Error", "The key can not be saved.", {
+          duration: 3000
+        });
       });*/
   }
 
-  getWeatherOption(): ISelectOption[] {
-    return [{
-      value: '0',
-      viewValue: 'Days'
-    }] as ISelectOption[]
+  getKey(): void{
+     this.http.get("https://secret-castle-75808.herokuapp.com/key").subscribe((ans: any)=> {
+        this._key = ans.key;
+    }, err =>{
+      console.log(err);
+      this.snackBar.open("Error", "The key can not be retrieved.", {
+        duration: 3000
+      });
+    });
   }
 
   getCurrentWeather(cityId: number): Observable<object> {
@@ -55,7 +62,8 @@ export class CheckingWeatherService {
     });
   }
 
-  getForecast5(cityId: number): Observable<object> {
+
+  getForecastHourly(cityId: number): Observable<object> {
     return this.http.get("http://api.openweathermap.org/data/2.5/forecast", {
       params: {
         id: cityId.toString(),
@@ -85,7 +93,7 @@ export class CheckingWeatherService {
         this.key = newKey;
         return true;
       })
-      .catch((data)=> {
+      .catch((err)=> {
         return false;
       })
   }

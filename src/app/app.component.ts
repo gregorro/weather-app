@@ -1,5 +1,5 @@
 import { MatSlideEvent } from "./../typings/typings.d";
-import { MapDirective } from "./map.directive";
+import { DynamicComponentDirective } from "./map.directive";
 import { DynamicMapComponent } from "./dynamic-map/dynamic-map.component";
 import {
   ViewChild,
@@ -46,7 +46,7 @@ export class AppComponent implements OnInit, AfterContentChecked {
   isEnoughBigView: boolean;
 
   @ViewChild("section", { read: ElementRef }) section: ElementRef;
-  @ViewChild(MapDirective) gMap: MapDirective;
+  @ViewChild(DynamicComponentDirective) gMap: DynamicComponentDirective;
 
   ngOnInit() {
     window.innerWidth >= 600
@@ -65,20 +65,8 @@ export class AppComponent implements OnInit, AfterContentChecked {
     this.scrollBackgroundContainers = document.getElementsByClassName(
       "scroll-background"
     );
-    this.scrollBackgroundContainers[0] && window.innerWidth < 1100
-      ? (this.scrollBackgroundContainers[0].className =
-          "scroll-background full-width")
-      : null;
-    this.scrollBackgroundContainers[0] && window.innerWidth >= 1100
-      ? (this.scrollBackgroundContainers[0].className = "scroll-background")
-      : null;
-    this.scrollBackgroundContainers[1] && window.innerWidth < 1350
-      ? (this.scrollBackgroundContainers[1].className =
-          "scroll-background full-width")
-      : null;
-    this.scrollBackgroundContainers[1] && window.innerWidth >= 1350
-      ? (this.scrollBackgroundContainers[1].className = "scroll-background")
-      : null;
+
+    this.setBackground();
 
     const choiceBox: HTMLElement = document.querySelector(
       ".ui-autocomplete-panel"
@@ -101,20 +89,8 @@ export class AppComponent implements OnInit, AfterContentChecked {
     window.innerWidth >= 600
       ? (this.isEnoughBigView = true)
       : (this.isEnoughBigView = false);
-    this.scrollBackgroundContainers[0] && window.innerWidth < 1100
-      ? (this.scrollBackgroundContainers[0].className =
-          "scroll-background full-width")
-      : null;
-    this.scrollBackgroundContainers[0] && window.innerWidth >= 1100
-      ? (this.scrollBackgroundContainers[0].className = "scroll-background")
-      : null;
-    this.scrollBackgroundContainers[1] && window.innerWidth < 1350
-      ? (this.scrollBackgroundContainers[1].className =
-          "scroll-background full-width")
-      : null;
-    this.scrollBackgroundContainers[1] && window.innerWidth >= 1350
-      ? (this.scrollBackgroundContainers[1].className = "scroll-background")
-      : null;
+
+      this.setBackground();
 
     if (window.innerWidth < 1500) {
       this.isSlideVisible = false;
@@ -128,6 +104,20 @@ export class AppComponent implements OnInit, AfterContentChecked {
 
     if (window.innerWidth >= 1500) {
       this.isSlideVisible = true;
+    }
+  }
+
+  setBackground() : void{
+    if(this.scrollBackgroundContainers[0]){
+      if(this.scrollBackgroundContainers[0].classList.contains('day-component') && window.innerWidth < 1100){
+        this.scrollBackgroundContainers[0].className = "scroll-background day-component full-width";
+      }else if(this.scrollBackgroundContainers[0].classList.contains('day-component') && window.innerWidth >= 1100){
+        this.scrollBackgroundContainers[0].className = "scroll-background day-component";
+      } else if(this.scrollBackgroundContainers[0].classList.contains('hour-component') && window.innerWidth < 1450){
+        this.scrollBackgroundContainers[0].className = "scroll-background hour-component full-width";
+      } else if(this.scrollBackgroundContainers[0].classList.contains('hour-component') && window.innerWidth >= 1450){
+        this.scrollBackgroundContainers[0].className = "scroll-background hour-component";
+      }
     }
   }
 

@@ -1,0 +1,25 @@
+<div class="weather" >
+  <div *ngIf="isAvailableData" class="forecast-header">
+    <h1>Forecast</h1>
+    <mat-form-field>
+      <mat-label>Weather options</mat-label>
+      <mat-select [value]= "currentSelectedWeather" (selectionChange)="setWeatherView($event.value, true)">
+        <mat-option value="-1">
+          Five Days
+        </mat-option>
+        <mat-optgroup label="Charts:">
+          <mat-option *ngFor="let option of options" [value]="option.value">
+            {{option.viewValue}}
+          </mat-option>
+        </mat-optgroup>
+        <mat-optgroup label="Hourly weather on:">
+          <mat-option *ngFor="let day of days" [value]="day.value">
+            {{day.viewValue}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <hr>
+  <ng-template app-dynamic></ng-template>
+</div>

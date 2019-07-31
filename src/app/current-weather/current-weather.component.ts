@@ -9,6 +9,7 @@ import {
   AfterViewChecked,
   HostListener
 } from "@angular/core";
+import { HourlyWeatherMessageService } from '../services/hourly-weather-event-service/hourly-weather-event-service';
 
 @Component({
   selector: "app-current-weather",
@@ -16,7 +17,7 @@ import {
   styleUrls: ["./current-weather.component.scss"]
 })
 export class CurrentWeatherComponent implements AfterViewChecked {
-  constructor(private http: CheckingWeatherService, private snackBar: MatSnackBar) {
+  constructor(private http: CheckingWeatherService, private snackBar: MatSnackBar, private appInfoService: HourlyWeatherMessageService) {
     this.isAvailableData = false;
     this.isMapActive = false;
     this.isStart = true;
@@ -44,6 +45,7 @@ export class CurrentWeatherComponent implements AfterViewChecked {
   ngAfterViewChecked() {
     const doc = document.getElementsByTagName('body')[0];
     doc.className === 'drizzle-weather' || doc.className === 'snow-weather'  ? this.isBlackText = true: this.isBlackText = false;
+    this.isBlackText  ? this.appInfoService.currentWeatherColorScheme = 'black' : this.appInfoService.currentWeatherColorScheme = 'white' ;
 
     if (this.arrow && this.dayWeather) {
       this.arrow.nativeElement.style.transform = `rotate(${
@@ -140,6 +142,7 @@ export class CurrentWeatherComponent implements AfterViewChecked {
       wind: currentViewWeather.wind ? currentViewWeather.wind : null,
       snow: currentViewWeather.snow ? currentViewWeather.snow : null,
       rain: currentViewWeather.rain ? currentViewWeather.rain : null,
+      clouds: currentViewWeather.clouds ? currentViewWeather.clouds : null,
       humidity: currentViewWeather.main.humidity,
       pressure: currentViewWeather.main.pressure.toFixed(),
       temp: (currentViewWeather.main.temp - 273.15).toFixed(),

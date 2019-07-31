@@ -2,13 +2,18 @@ export interface IAppKey {
   key: string;
 }
 
-export interface MatSlideEvent{
+export interface MatSlideEvent {
   checked: boolean;
 }
 
-export interface HTMLEvent{
+export interface HTMLEvent {
   value?: any;
   stopPropagation(): void;
+}
+
+export interface IChartInfoPack{
+  weather: IForecast,
+  name: string,
 }
 
 export interface IWeatherPackage {
@@ -17,6 +22,7 @@ export interface IWeatherPackage {
   description: string;
   wind: IWind | null;
   snow: ISnow | null;
+  clouds: IClouds | null;
   rain: IRain | null;
   humidity: number;
   pressure: string;
@@ -28,7 +34,7 @@ export interface IWeatherPackage {
   name?: string;
   country?: string;
 }
-export interface ISelectOption{
+export interface ISelectOption {
   value: string;
   viewValue: string;
 }
@@ -37,7 +43,7 @@ export interface ISelectOption{
 
 export interface IWeather {
   coord: ICoord;
-  weather:  IWeatherDetails | IWeatherDetails[];
+  weather: IWeatherDetails | IWeatherDetails[];
   base: string;
   main: IMain;
   visibility: number;
@@ -56,12 +62,10 @@ export interface IWeather {
 export interface IForecast {
   code: string;
   message: number;
-  city: ICity
+  city: ICity;
   cnt: number;
   list: IList[];
 }
-
-
 
 /////////////////////////////////////
 
@@ -81,11 +85,28 @@ export interface IMain {
   temp: number;
   pressure: number;
   humidity: number;
-  temp_min: number;
-  temp_max: number;
+  temp_min?: number;
+  temp_max?: number;
   sea_level?: number;
   grnd_level?: number;
   temp_kf?: number;
+}
+
+export interface ITemp {
+  average: number;
+  average_max: number;
+  average_min: number;
+  record_max: number;
+  record_min: number;
+}
+
+export interface ITemp2 {
+  day: number;
+  min: number;
+  max: number;
+  night: number;
+  eve: number;
+  morn: number;
 }
 
 export interface IWind {
@@ -98,13 +119,13 @@ export interface IClouds {
 }
 
 export interface IRain {
-  '1h'?: number;
-  '3h': number;
+  "1h"?: number;
+  "3h": number;
 }
 
 export interface ISnow {
-  '1h'?: number;
-  '3h': number;
+  "1h"?: number;
+  "3h": number;
 }
 
 export interface ISys {
@@ -119,7 +140,7 @@ export interface ISys {
 export interface ICity {
   id: number;
   name: string;
-  coord: ICoord
+  coord: ICoord;
   country: string;
   timezone?: number;
 }
@@ -130,9 +151,10 @@ export interface IList {
   weather: IWeatherDetails;
   clouds?: IClouds;
   wind?: IWind;
+  wind_speed?: number;
   rain?: IRain;
   snow?: ISnow;
-  sys?: ISys2
+  sys?: ISys2;
   dt_txt: string;
 }
 

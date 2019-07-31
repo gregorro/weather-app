@@ -5,18 +5,20 @@ import {
   Component,
   Output,
   EventEmitter,
-  AfterViewChecked
+  AfterViewChecked,
+  OnDestroy
 } from "@angular/core";
 import { SelectItem } from "primeng/api";
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: "app-aside-panel",
   templateUrl: "./aside-panel.component.html",
   styleUrls: ["./aside-panel.component.scss"]
 })
-export class AsidePanelComponent implements AfterViewChecked {
+export class AsidePanelComponent implements AfterViewChecked, OnDestroy {
   constructor(private http: CheckingWeatherService, private snackBar: MatSnackBar) {
     this.isSlideBarOpen = false;
     this.isAnyCity = false;
@@ -25,6 +27,7 @@ export class AsidePanelComponent implements AfterViewChecked {
     this.infoSuccess = false;
     this.startChangeDetection = false;
     this.lastCityId = -1;
+    this.isSetKeyInputVisible = false;
   }
 
   firstCityPlaceholder: SelectItem = {
@@ -42,19 +45,20 @@ export class AsidePanelComponent implements AfterViewChecked {
   infoError: boolean;
   startChangeDetection: boolean;
   lastCityId: number;
+  serverConnection: Subscription;
+  isSetKeyInputVisible: boolean;
 
   @Output() newWeatherIdEvent: EventEmitter<number> = new EventEmitter();
   @Output() showMapEvent: EventEmitter<ICity | boolean> = new EventEmitter();
 
-  async filterCities(event): Promise<void> {
+  filterCities(event): void {
     let query: string = event.query;
-    await this.http
-      .getCityList(query)
-      .toPromise()
-      .then((data: ICity[]) => {
+    this.serverConnection ? this.serverConnection.unsubscribe() : null;
+    this.serverConnection =  this.http
+      .getCityList(query).subscribe((data: ICity[]) => {
         this.filteredCities = data;
-      }).catch((err: HttpErrorResponse) =>{
-        this.snackBar.open('Error', 'Unexpected server error.',{
+      }, (err: HttpErrorResponse) =>{
+        this.snackBar.open('Error', 'Unexpected server error.', {
           duration: 3000,
         });
       });
@@ -81,6 +85,10 @@ export class AsidePanelComponent implements AfterViewChecked {
         this.lastCityId = this.filteredCities[focusCityArrayIndex].id;
       }
     }
+  }
+
+  ngOnDestroy(){
+    this.serverConnection.unsubscribe();
   }
 
 

@@ -14,7 +14,7 @@
   <div>
     <nav>
       <app-aside-panel (showMapEvent)="setMap($event); $event === false ? op.hide($event) : op.show($event) "
-        (newWeatherIdEvent)="current.onNewWeatherIdEvent($event); fiveDay.onNewWeatherIdEvent($event); isStart=false; checkViewSize($event)">
+        (newWeatherIdEvent)="current.onNewWeatherIdEvent($event); container.onNewWeatherIdEvent($event); isStart=false; checkViewSize($event)">
       </app-aside-panel>
     </nav>
     <p-overlayPanel #op [style]="{'width': '500px','height': '370px','top': '365px', 'left': '40px'}">
@@ -22,7 +22,7 @@
         <p>City: <b>{{data.name}}</b></p>
         <p>Country: <b>{{data.country}}</b></p>
       </div>
-      <ng-template app-map></ng-template>
+      <ng-template app-dynamic></ng-template>
     </p-overlayPanel>
     <div id="sectionBox" #section>
       <div *ngIf="isStart">
@@ -39,7 +39,7 @@
         <app-current-weather #current></app-current-weather>
       </section>
       <section>
-        <app-five-day-weather #fiveDay></app-five-day-weather>
+        <app-weather-container #container></app-weather-container>
       </section>
     </div>
   </div>
